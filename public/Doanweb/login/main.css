@@ -1,0 +1,179 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+label.error{
+    color:#ff55a5;
+}
+
+.modal__box__input--login.modal__box__input{
+    margin-top:70px;
+}
+
+a{
+    text-decoration: none;
+    color:rgba(255,255,255,.6);
+}
+a:hover{
+    text-decoration: underline;
+}
+
+body{
+    margin:0; 
+}
+.modal{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-color:#2b2b31;
+}
+
+.modal__logo{
+    width: 100px;
+}
+.modal__box{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    margin:auto;
+    max-width: 400px;
+    height: 650px;
+    background-color:#28282d;
+    border-radius: 5px;
+    box-shadow: 0 5px 25px 0 rgba(0,0,0,.3);
+    overflow: hidden;
+} 
+
+.modal__box::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    display: block;
+    background-image: linear-gradient(90deg,#ff55a5 0,#ff5860 100%);
+    box-shadow: 0 0 20px 0 rgba(255,88,96,.5);
+}
+
+.modal__box__contain{
+    width: 325px;
+    margin: auto;
+}
+
+.modal__box__general{
+    width: 325px;
+    position: absolute;
+    transition:all .5s;
+}
+
+.modal__box--login{
+    left:35px;
+}
+
+.modal__box--register{
+    left:450px;  
+}
+
+.modal__box__heading{
+    width:250px;
+    margin:50px auto 0;
+    position: relative;
+    border-radius: 30px;
+    box-shadow: 0 0 20px 9px #ff61241f;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.modal__box__heading__item{
+    background-image: linear-gradient(90deg,#ee0979 0,#ff6a00 100%);
+    width: 50%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
+    transition: all .5s;
+    border-radius: 30px;
+
+}
+
+.modal__box__btn{
+    position: relative;
+    padding: 15px 20px;
+    background-color:transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    color:white;
+}
+
+.modal__box__social{
+    display:flex;
+    justify-content: center;
+    color:white;
+}
+
+.modal__box__logo{
+    text-align: center;
+    margin:10px 0;
+}
+.modal__box__social__icon{
+    background-image: linear-gradient(90deg,#ee0979 0,#ff6a00 100%);
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0 10px;
+    cursor: pointer;
+}
+
+.modal__box__social__icon__main{
+    font-size:20px;
+}
+
+.modal__box__input{
+    margin-top: 30px;
+}
+
+.modal__box__input__main{
+    width: 100%;
+    margin:10px 0;
+    padding: 15px 15px;
+    border:none;
+    outline: none;
+    font-size:16px;
+    background-color:#2b2b31;
+    color:rgba(255,255,255,.5);
+}
+
+.modal__box__remember{
+    margin: 10px 0;
+}
+.modal__box__term{
+    margin: 10px 0;
+}
+
+.poli{
+    color:rgba(255,255,255,.6);
+}
+.modal__box__btn--login{
+    margin:20px 0;
+    text-align: center;
+}
+
+.modal__box__btn--login__main{
+    padding:20px 110px;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(90deg,#ee0979 0,#ff6a00 100%);
+    border-radius: 30px;
+    cursor: pointer;
+}

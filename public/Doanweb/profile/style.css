@@ -1,0 +1,163 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    margin:0;
+    background-color:#28282d;
+    color:#fff;
+}
+h1,h2,h3,h4{
+    margin:0;
+}
+
+a{
+    text-decoration: none;
+}
+.home--tag-a{
+    color:rgba(255,255,255,.5);
+    transition:all .3s;
+}
+.home--tag-a:hover{
+    color:#ff55a5;
+}
+
+.main__heading{
+    border-bottom: 2px solid #ff55a5;
+    padding:30px 0;
+}
+
+.main__heading__child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main__heading__child--title{
+    font-size:30px;
+}
+
+.main__heading__child__breadcrumb{
+    display: flex;
+    align-items: center;
+    color:rgba(255,255,255,.5);
+}
+
+.main__heading__child__breadcrumb__item{
+    margin:0 5px;
+}
+
+.main__profile{
+    margin-bottom: 50px;
+    box-shadow: 0 5px 25px 0 rgba(0,0,0,.3);
+}
+
+.main__profile__child{
+    display:flex;
+    justify-content: space-between;
+}
+
+.main__profile__child__item{
+    display:flex;
+    align-items: center;
+}
+
+.main__profile__child__item__name{
+    margin:0 20px;
+}
+
+.main__profile__child__item__category{
+    margin: 0 30px;
+    padding:30px 0;
+    transition:  all .3s;
+    border-bottom: 2px solid #28282d;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.main__profile__child__item__category:hover{
+    border-bottom: 2px solid #ff55a5;
+}
+
+.active__category{
+    border-bottom: 2px solid #ff55a5;
+    cursor: default;
+}
+
+.main__profile__child__img__main{
+    width: 50px;
+    height: 50px;
+    border-radius:100%; 
+}
+
+.main__detail{
+
+}
+
+.main__detail__child{
+
+}
+
+.main__detail__child__item{
+    
+
+}
+
+.main__detail__child__contain{
+    padding:30px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
+    margin-bottom: 30px;
+}
+
+.main__detail__child__item__small{
+    margin-bottom: 20px;
+}
+
+.input--label{
+    font-size:15px;
+    color:rgba(255,255,255,.75);
+}
+
+.input{
+    margin:10px 0;
+    background-color: #2b2b31;
+    border: none;
+    height: 50px;
+    color: #fff;
+    font-size: 15px;
+    width: 100%;
+    color: #fff;
+    padding: 0 20px;
+    letter-spacing: .2px;
+    outline: none;
+}
+
+.btn{
+    padding: 20px;
+    outline: none;
+    border:none;
+    color:white;
+}
+
+.btn--submit{
+    border-radius: 10px;
+    background-image: linear-gradient(90deg,#ee0979 0,#ff6a00 100%);
+    cursor: pointer;
+}
+
+.main__detail__title{
+    margin-bottom: 20px;  
+    font-size:22px;   
+}
+
+.main__detail__namefilm{
+    text-align: center;
+}
+
+.main__film__img{
+    width: 100%;
+}
+
+.favorite{
+    display: none;
+}
