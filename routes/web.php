@@ -28,4 +28,8 @@ Route::post('/login','App\Http\Controllers\Login@login')->name('login');
 
 Route::get('/','App\Http\Controllers\Home@index')->name('home');
 
+Route::get('/movie','App\Http\Controllers\Movie@index');
 
+Route::get('/actor','App\Http\Controllers\Actor@index');
+
+Route::get('/actor/{id}','App\Http\Controllers\Actor@show');

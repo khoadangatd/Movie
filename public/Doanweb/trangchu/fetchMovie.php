@@ -38,13 +38,13 @@
                                 Thể loại : $ten    
                             </p>
                             <p class='movie-content-country'>
-                                Quốc gia : $qg->english_name
+                                Ngôn ngữ : $qg->english_name
                             </p>
                             <p class='movie-content-imbd'>
                                 iMDb $value->vote_average
                             </p>
-                            <p class='movie-content-title-engl'>
-                                Năm : $value->release_date
+                            <p class='movie-content-date'>
+                                $value->release_date
                             </p>
                             <p class='movie-content-desc'>
                                 $value->overview

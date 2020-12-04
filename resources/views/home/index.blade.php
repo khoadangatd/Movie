@@ -1,4 +1,7 @@
 @extends('layout.dash')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('Doanweb/home.css')}}"/>
+@endsection
 @section('title')
 Trang Chủ
 @endsection
@@ -123,7 +126,7 @@ Trang Chủ
                             </div>
                             @endfor
                         </div>
-                        <span class="header-slide-btn header-slide-left"><i class="fas fa-arrow-left"></i></span>
+                        <span class="header-slide-btn header-slide-left btn--disable"><i class="fas fa-arrow-left"></i></span>
                         <span class="header-slide-btn header-slide-right"><i class="fas fa-arrow-right"></i></span>
                     </div>
                 </div>
@@ -156,7 +159,6 @@ Trang Chủ
     <div class="container">
         <div class="movie-news movie-list movie-list-active">
             <div class="row list-tab-movie">
-
             </div>
         </div>
     </div>
@@ -671,7 +673,7 @@ Trang Chủ
                                 {{$popular[$i]['title']}}
                             </p>
                             <p class="movie-new-update-item-des-title-engl">
-                                {{$popular[$i]['title']}}
+                                {{$popular[$i]['release_date']}}
                             </p>
                         </div>
                     </div>
@@ -877,7 +879,7 @@ Trang Chủ
             </div> -->
         </div>
         <div class="movie-new-update-btn">
-            <a href="#" class="nav-login">Xem thêm</a>
+            <a href="/movie?p=1" class="nav-login">Xem thêm</a>
         </div>
     </div>
 </div>

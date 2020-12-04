@@ -1,7 +1,14 @@
 @extends('layout.dash')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('Doanweb/profile/style.css')}}"/>
+@endsection
+@section('js')
+    <script src="{{ asset('Doanweb/profile/index.js')}}"></script>
+@endsection
 @section('title')
     Hồ Sơ
 @endsection
+
 @section('section')
     <div class="main">
         <div class="main__heading">
@@ -42,7 +49,7 @@
                             </div>
                             <div class="main__profile__child__item">
                                 <a href="{{asset('logout')}}">
-                                    <button class="btn--submit btn">ĐĂNG XUẤT</button>
+                                    <button class="nav-login">ĐĂNG XUẤT</button>
                                 </a>
                             </div>
                         </div>
@@ -80,7 +87,7 @@
                                 </div> -->
                                 <div class="row main__detail__child__item__small">
                                     <div class="col-lg-3">
-                                        <input type="submit" name="update1" class="input btn--submit" value="Lưu">
+                                        <input type="submit" name="update1" class="nav-login input" value="Lưu">
                                     </div>
                                 </div>
                             </form>
@@ -113,7 +120,7 @@
                                 </div>
                                 <div class="row main__detail__child__item__small">
                                     <div class="col-lg-3">
-                                        <input type="submit" name="update2" class="input btn--submit" value="Lưu">
+                                        <input type="submit" name="update2" class="nav-login input" value="Lưu">
                                     </div>
                                 </div>
                             </form>
