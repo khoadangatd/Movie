@@ -10,6 +10,40 @@
 Phim
 @endsection
 @section('section')
+@if(isset($keyword))
+<div class="main">
+    <div class="main__heading main__heading--movie">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-12">
+                    <div class="main__heading__child">
+                        <h1 class="main__heading__child--title">Từ khóa :{{$keyword}}
+                        </h1>
+                        <div class="main__heading__child__breadcrumb">
+                            <div class="main__heading__child__breadcrumb__item">
+                                <p><a href="{{route('home')}}" class="home--tag-a">Trang chủ</a></p>
+                            </div>
+                            <div class="main__heading__child__breadcrumb__item">
+                                <i class="fas fa-long-arrow-alt-right"></i>
+                            </div>
+                            <div class="main__heading__child__breadcrumb__item">
+                                <p><a href="{{route('home')}}" class="home--tag-a">Tìm kiếm</a></p>
+                            </div>
+                            <div class="main__heading__child__breadcrumb__item">
+                                <i class="fas fa-long-arrow-alt-right"></i>
+                            </div>
+                            <div class="main__heading__child__breadcrumb__item">
+                                <p>
+                                    {{$keyword}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@else
 <div class="main">
     <div class="main__heading main__heading--movie">
         <div class="container">
@@ -36,6 +70,7 @@ Phim
             </div>
         </div>
     </div>
+@endif
     <div class="main__profile">
         <div class="container">
             <div class="row align-items-center">
@@ -141,7 +176,11 @@ Phim
                 @endforeach
                 
                 <div class="col-12" style='text-align:center'>
+                    @if(isset($keyword))
+                    <div class="pagination" page={{$page}} keyword={{$keyword}}>
+                    @else
                     <div class="pagination" page={{$page}}>
+                    @endif
                         <span class="pagination__btn pagination__btn-left"><i class="fas fa-angle-left"></i></span>
                         <div class="pagination-custom">
                             

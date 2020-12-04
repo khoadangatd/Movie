@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class Actor extends Controller
 {
@@ -11,9 +12,17 @@ class Actor extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        if(isset($request->p)&&$request->p<11)
+        {
+            $response = Http::get('https://api.themoviedb.org/3/person/popular?api_key=12baa83af9302206b6af65913d262a81&language=en-US&page='.$request->p)->json()['results'];
+            return view("actor.index")->with("actors",$response)->with("page",$request->p);
+        }   
+        else{
+            return redirect("");
+        }
     }
 
     /**
@@ -46,6 +55,9 @@ class Actor extends Controller
     public function show($id)
     {
         //
+        $url = "https://api.themoviedb.org/3/person/$id?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&append_to_response=movie_credits";
+        $response = Http::get($url)->json();
+        return view('actor.detailActor')->with('actor',$response);
     }
 
     /**

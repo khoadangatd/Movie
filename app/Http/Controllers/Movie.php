@@ -16,13 +16,17 @@ class Movie extends Controller
     {
         //\
         $url = 'https://api.themoviedb.org/3/movie/popular?api_key=12baa83af9302206b6af65913d262a81&language=en-US&page=';
-        if(isset($request->p)){            
-            $response = Http::get($url.$request->p)->json()['results'];
-            if($request->p>10){
-                return redirect("");
-            }
+        $urlS = 'https://api.themoviedb.org/3/search/movie?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&include_adult=false';
+        if(isset($request->p)&&$request->p<11&&!isset($request->k)){            
+            $response = Http::get($url.$request->p)->json()['results'];            
             return view('movie.index')->with('movies',$response)->with('page',$request->p);
         }
+        else if(isset($request->k)&&isset($request->p)&&$request->p<11){
+            $response = Http::get($urlS."&query=".$request->k."&page=".$request->p)->json()['results'];
+            return view('movie.index')->with('movies',$response)->with('page',$request->p)->with('keyword',$request->k);
+        }
+        // else
+        //     return redirect("");
     }
 
     /**p

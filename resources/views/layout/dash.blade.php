@@ -42,8 +42,8 @@
             </li>
 
             <li class="navigation-item">
-                <a href="" class="navigation-link">
-                    SẮP CHIẾU
+                <a href="{{asset('/actor/?p=1')}}" class="navigation-link">
+                    DIỄN VIÊN
                 </a>
             </li>
 
@@ -52,12 +52,12 @@
             <div class="nav-search">
                 <i class="fas fa-search"></i>
                 <div class="dropdown-search">
-                        <form action="GET" class="form-search">
-                            <input type="text" class="form-search-input" placeholder='Tìm kiếm phim theo tên, diễn viên, đạo diễn, thể loại, ...'>
-                            <input type="submit" class="form-search-submit" value='TÌM KIẾM'>
-                        </form>
-        
-                    </div>   
+                    <form action="/movie" class="form-search" method="GET">
+                        <input type="hidden" name="p" value="1">
+                        <input type="text" class="form-search-input" name="k" placeholder='Tìm kiếm phim theo tên, diễn viên, đạo diễn, thể loại, ...'>
+                        <input type="submit" class="form-search-submit" value='TÌM KIẾM'>
+                    </form>
+                </div>   
             </div>
             <p class="nav-language">
                 VI
