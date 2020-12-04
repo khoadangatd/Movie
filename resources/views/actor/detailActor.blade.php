@@ -18,14 +18,16 @@
                     </h1>
                     <div class="main__heading__child__breadcrumb">
                         <div class="main__heading__child__breadcrumb__item">
-                            <p><a href="{{route('home')}}" class="home--tag-a">Trang chủ</a></p>
+                            <p><a href="{{asset('')}}" class="home--tag-a">Trang chủ</a></p>
                         </div>
                         <div class="main__heading__child__breadcrumb__item">
                             <i class="fas fa-long-arrow-alt-right"></i>
                         </div>
                         <div class="main__heading__child__breadcrumb__item">
                             <p>
-                                Diễn viên
+                                <a href="{{asset('/actor?p=1')}}"  class="home--tag-a">
+                                    Diễn viên
+                                </a>
                             </p>
                         </div>
                         <div class="main__heading__child__breadcrumb__item">

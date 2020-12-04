@@ -145,7 +145,11 @@ Phim
                 <div class='col-6 mt-5 d-flex'>
                     <a href='/movie/{{$movie["id"]}}'>
                         <div class='movie-img'>
-                            <img src='https://image.tmdb.org/t/p/w500/{{$movie["poster_path"]}}' alt='' class='movie-img-item'>
+                            @if(isset($movie["poster_path"]))
+                                <img src='https://image.tmdb.org/t/p/w500/{{$movie["poster_path"]}}' alt='' class='movie-img-item'>
+                            @else
+                                <img src='https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg' alt='' class='movie-img-item'>
+                            @endif
                             <span class='quality'>FullHD</span>
                         </div>
                     </a>
@@ -177,7 +181,7 @@ Phim
                 
                 <div class="col-12" style='text-align:center'>
                     @if(isset($keyword))
-                    <div class="pagination" page={{$page}} keyword={{$keyword}}>
+                    <div class="pagination" page={{$page}} keyword={{$keyword}} totalP={{$total}}>
                     @else
                     <div class="pagination" page={{$page}}>
                     @endif

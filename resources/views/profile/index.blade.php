@@ -134,29 +134,13 @@
                 <div class="main__detail__child__contain">
                     <h2 class="main__detail__title">PHIM YÊU THÍCH CỦA BẠN</h2>
                     <div class="row">
-                        <div class="main__film col-lg-3">
-                            <H3 class="main__detail__namefilm">
-                                Hãi hùng
-                            </H3>
-                            <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
-                        </div>
-                        <div class="main__film col-lg-3">
-                            <H3 class="main__detail__namefilm">
-                                Hãi hùng
-                            </H3>
-                            <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
-                        </div>
-                        <div class="main__film col-lg-3">
-                            <H3 class="main__detail__namefilm">
-                                Hãi hùng
-                            </H3>
-                            <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
-                        </div>
-                        <div class="main__film col-lg-3">
-                            <H3 class="main__detail__namefilm">
-                                Hãi hùng
-                            </H3>
-                            <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
+                        <div class="main__film col-lg-2">
+                            <a href="">
+                                <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
+                            </a>
+                            <p class="main__detail__namefilm">
+                                Joker
+                            </p>
                         </div>
                     </div>
                 </div> 

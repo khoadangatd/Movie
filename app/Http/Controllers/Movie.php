@@ -22,13 +22,12 @@ class Movie extends Controller
             return view('movie.index')->with('movies',$response)->with('page',$request->p);
         }
         else if(isset($request->k)&&isset($request->p)&&$request->p<11){
-            $response = Http::get($urlS."&query=".$request->k."&page=".$request->p)->json()['results'];
-            return view('movie.index')->with('movies',$response)->with('page',$request->p)->with('keyword',$request->k);
+            $response = Http::get($urlS."&query=".$request->k."&page=".$request->p)->json();
+            return view('movie.index')->with('movies',$response['results'])->with('page',$request->p)->with('keyword',$request->k)->with('total',$response['total_pages']);
         }
-        // else
-        //     return redirect("");
+        else
+            return redirect("");
     }
-
     /**p
      * Show the form for creating a new resource.
      *
@@ -59,6 +58,9 @@ class Movie extends Controller
     public function show($id)
     {
         //
+        $url="https://api.themoviedb.org/3/movie/$id?api_key=12baa83af9302206b6af65913d262a81&language=en-US&append_to_response=credits,similar,images&include_image_language=en";
+        $response=Http::get($url)->json();
+        return view('movie.detail')->with('info',$response);
     }
 
     /**

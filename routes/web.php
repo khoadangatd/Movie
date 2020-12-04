@@ -30,6 +30,10 @@ Route::get('/','App\Http\Controllers\Home@index')->name('home');
 
 Route::get('/movie','App\Http\Controllers\Movie@index');
 
+Route::get('/movie/{id}','App\Http\Controllers\Movie@show');
+
 Route::get('/actor','App\Http\Controllers\Actor@index');
 
 Route::get('/actor/{id}','App\Http\Controllers\Actor@show');
+
+

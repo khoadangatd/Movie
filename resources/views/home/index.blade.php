@@ -662,7 +662,7 @@ Trang Chủ
             @for($i=0;$i<18;$i++)
                 <div class="col-2">
                     <div class="movie-new-update-item">
-                        <a href='#' class="card-movie">
+                        <a href="/movie/{{$popular[$i]['id']}}" class="card-movie">
                             <img src="https://image.tmdb.org/t/p/w500{{$popular[$i]['poster_path']}}" alt="" class="card-movie-img">
                             <div class="card-movie-icon">
                                 <i class="fas fa-play"></i>

@@ -73,6 +73,7 @@ a{
     border-bottom: 2px solid #28282d;
     cursor: pointer;
     text-transform: uppercase;
+    font-weight: 400;
 }
 
 .main__profile__child__item__category:hover{
@@ -134,15 +135,25 @@ a{
 
 .main__detail__title{
     margin-bottom: 20px;  
-    font-size:22px;   
+    font-size: 35px;
+    color: #dadada;
+    font-weight: 300;
 }
 
 .main__detail__namefilm{
-    text-align: center;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    margin: 8px 0;
 }
 
 .main__film__img{
     width: 100%;
+    border-radius:10px;
 }
 
 .favorite{
