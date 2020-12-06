@@ -5,7 +5,6 @@ $(function(){
     console.log(page);
     var temp;
     let content='';
-    $
     if($(".pagination").attr("keyword")==null){
         for(i=1;i<=10;i++){
             if(i==page)
@@ -68,5 +67,31 @@ $(function(){
         $('.reviews').addClass('active-1');
         $('.comments').removeClass('active-1');
     })
+    var idphim=$(".comment__main").attr("idphim");
+    var contentC=$("#comment--content").val();
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+    $.post("/ajaxcomment",{idphim},function(data,status){
+        $(".comment__main").html(data);
+    })
+    $("#post--comment").click(function(){
+        $.post('/ajaxpost'),{contentC,idphim},function(data,status){
+            $(".comment__main").html(data);
+        }
+    })
+    // use REPLY
+    // <div class='feedback'>
+    //     <button class='reply'>
+    //         <i class='fas fa-reply'></i>
+    //         REPLY
+    //     </button>
+    //     <button class='quote'>
+    //     <i class='fas fa-quote-right'></i>
+    //         QUOTE
+    //     </button>
+    // </div>
 })
 

@@ -19,31 +19,26 @@ class Login extends Controller
         $count = User::where('username','=',$username,'and')->where('password','=',md5(sha1($password)))->count();
         if($count>0){
             session()->put("user",$user[0]);
+            session()->put("message",["Đăng nhập thành công","Cùng tận hưởng nào","success"]);
             return redirect('');
         }
-        session()->put("title","Đăng nhập thất bại");
-        session()->put("status","Mật khẩu hoặc tài khoản của bạn không đúng");
-        session()->put("noti","error");
+        session()->put("message",["Đăng nhập thất bại","Mật khẩu hoặc tài khoản của bạn không đúng","error"]);
         return redirect('/form');
     }
     public function register(Request $request){
         $username = $request->input("user");
         $password = $request->input("password");
-        $count = User::where('username','=',$username,'and')->count();
-        if($count<0){
+        $count = User::where('username','=',$username)->count();
+        if($count==0){
             $user= new User;
             $user->username=$username;
             $user->password=md5(sha1($password));
             $user->tenuser=$username;
             $user->save();
+            session()->put("message",["Đăng kí thành công","Hãy đăng nhập và tận hưởng những thước phim của mình","success"]);
             return redirect("/form");
-            session()->put("title","Đăng kí thành công");
-            session()->put("status","Hãy tận hưởng những thước phim của mình");
-            session()->put("noti","success");
         }
-        session()->put("title","Đăng kí thất bại");
-        session()->put("status","Username của bạn đã có người sử dụng");
-        session()->put("noti","error");
+        session()->put("message",["Đăng kí thất bại","Username của bạn đã có người sử dụng","error"]);
         return redirect("/form");
     }
     public function logout(Request $request){

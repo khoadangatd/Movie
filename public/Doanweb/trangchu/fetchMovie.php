@@ -19,7 +19,6 @@
             foreach($detail->genres as $genres)
             {
                 $ten=$ten.$genres->name." ";
-            }
             echo "<div class='col-6 mt-5 d-flex'>
                         <a href='/movie/$value->id'>
                             <div class='movie-img'>
@@ -51,6 +50,7 @@
                             </p>
                         </div>
                     </div>";
+            }
         }
     }
 ?>

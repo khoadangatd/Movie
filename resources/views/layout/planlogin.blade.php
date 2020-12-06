@@ -17,15 +17,15 @@
     @yield('body')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset ('Doanweb/login/index.js')}}?v=<?php echo time(); ?>"></script>
-    @if(session()->has('title'))
+    @if(session()->has('message'))
         <script>
             swal({
-                title:"{{session()->get('title')}}",
-                text:"{{session()->get('status')}}",
-                icon:"{{session()->get('noti')}}"
+                title:"{{session()->get('message')[0]}}",
+                text:"{{session()->get('message')[1]}}",
+                icon:"{{session()->get('message')[2]}}"
             });
         </script>
-        {{session()->forget('title')}}
+        {{session()->forget('message')}}
     @endif
 </body>
 </html>

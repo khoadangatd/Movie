@@ -8,7 +8,6 @@
 @section('title')
     Hồ Sơ
 @endsection
-
 @section('section')
     <div class="main">
         <div class="main__heading">
@@ -16,7 +15,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="main__heading__child">
-                            <h1 class="main__heading__child--title">HỒ SƠ : {{session('user')->tenuser}}
+                            <h1 class="main__heading__child--title">HỒ SƠ : {{$Nuser->tenuser}}
                             </h1>
                             <div class="main__heading__child__breadcrumb">
                                 <div class="main__heading__child__breadcrumb__item">
@@ -27,7 +26,7 @@
                                 </div>
                                 <div class="main__heading__child__breadcrumb__item">
                                     <p>
-                                    {{session('user')->tenuser}}
+                                    {{$Nuser->tenuser}}
                                     </p> 
                                 </div>
                             </div>
@@ -36,14 +35,15 @@
                 </div>
             </div>
         </div>
+        @if(isset(session('user')->id)&&session('user')->id==$Nuser->id)
         <div class="main__profile">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="main__profile__child">
                             <div class="main__profile__child__item">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-mHFh8u6UvSXY3spw5oHgyZHKNmNOdgFJ9w&usqp=CAU" alt="avatar" class="main__profile__child__img__main">
-                                <h3 class="main__profile__child__item__name">{{session('user')->tenuser}}</h3>
+                                <img src="{{asset('/Doanweb/avatarmember.jpg')}}" alt="avatar" class="main__profile__child__img__main">
+                                <h3 class="main__profile__child__item__name"> {{$Nuser->tenuser}}</h3>
                                 <h3 class="main__profile__child__item__category active__category"> Hồ sơ</h3>
                                 <h3 class="main__profile__child__item__category"> Yêu thích</h3>
                             </div>
@@ -72,11 +72,11 @@
                                 <div class="row main__detail__child__item__small">
                                     <div class="col-lg-6">
                                         <label for="main__detail__child__item__name" class="input--label">Tên tài khoản</label>
-                                        <input type="text" id="main__detail__child__item__name" class="input" value="{{session('user')->tenuser}}" name="nametk">
+                                        <input type="text" id="main__detail__child__item__name" class="input" value="{{$Nuser->tenuser}}" name="nametk">
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="main__detail__child__item__username" class="input--label">Username</label>
-                                        <input type="text" id="main__detail__child__item__username" class="input" value="{{session('user')->username}}" name="username">
+                                        <input type="text" id="main__detail__child__item__username" class="input" value="{{$Nuser->username}}" name="username">
                                     </div>
                                 </div>
                                 <!-- <div class="row main__detail__child__item__small">
@@ -132,7 +132,7 @@
         <div class="main__detail favorite">
             <div class="container">
                 <div class="main__detail__child__contain">
-                    <h2 class="main__detail__title">PHIM YÊU THÍCH CỦA BẠN</h2>
+                    <h2 class="main__detail__title">Phim yêu thích của bạn</h2>
                     <div class="row">
                         <div class="main__film col-lg-2">
                             <a href="">
@@ -146,5 +146,39 @@
                 </div> 
             </div>
         </div>
+        @else
+        <div class="main__profile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main__profile__child">
+                            <div class="main__profile__child__item">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-mHFh8u6UvSXY3spw5oHgyZHKNmNOdgFJ9w&usqp=CAU" alt="avatar" class="main__profile__child__img__main">
+                                <h3 class="main__profile__child__item__name">{{$Nuser->tenuser}}</h3>
+                                <h3 class="main__profile__child__item__category active__category"> Yêu thích</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main__detail">
+            <div class="container">
+                <div class="main__detail__child__contain">
+                    <h2 class="main__detail__title">Phim yêu thích của {{$Nuser->tenuser}}</h2>
+                    <div class="row">
+                        <div class="main__film col-lg-2">
+                            <a href="">
+                                <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
+                            </a>
+                            <p class="main__detail__namefilm">
+                                Joker
+                            </p>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        @endif
     </div>
 @endsection

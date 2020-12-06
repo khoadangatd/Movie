@@ -199,100 +199,14 @@ Phim
                                 <div class="col-12">
                                     <div class="comments active-1">
                                         <div class="comment-form">
-                                            <form action="" class="form form-comment">
+                                            <form action="" class="form form-comment" method="POST">
                                                 <div class="content-quote"></div>
-                                                <textarea name="" id="" cols="30" rows="10" class="form__textarea" placeholder = "Để lại bình luận của bạn..."></textarea>
-                                                <button type = "submit" class="form__btn">GỬI</button>
+                                                <textarea name="comment--content" id="" cols="30" rows="10" class="form__textarea" id="comment--content" required placeholder = "Để lại bình luận của bạn..."></textarea>
+                                                <button type = "submit" class="form__btn" id="post--comment">GỬI</button>
                                             </form>
                                         </div>
-                                        <div class="comment-content">
-                                            <ul class="comments__list">
-                                                <li class="comment">
-                                                    <div class="comments__item">
-                                                        <div class="comments__autor">
-                                                            <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/117251156_780671119335149_3490588943834725576_o.jpg?_nc_cat=110&ccb=2&_nc_sid=09cbfe&_nc_ohc=w7TVQWb0pt8AX8PGAJo&_nc_ht=scontent.fsgn5-3.fna&oh=4a755a559aad9f474aab31f662f3effb&oe=5FF117A3" alt="" class="comments__avatar">
-                                                            <div class="box-info-1">
-                                                                <a href="" class="comments__name">
-                                                                    Tống Hoàng
-                                                                </a>
-                                                                <span class="comments__time">2020-11-30 08:12:45</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="comments__text">
-                                                            <div class="content_of_comment">
-                                                                Đĩnh của đĩnh
-                                                            </div>
-                                                        </div>
-                                                        <div class="comments__actions">
-                                                            <div class="comments__rate">
-                                                                <button>
-                                                                    <i class="fas fa-thumbs-up like"></i>
-                                                                    0
-                                                                </button>
-                                                                <button>
-                                                                <i class="fas fa-thumbs-down dislike"></i>
-                                                                    0
-                                                                </button>
-                                                            </div>
-                                                            <div class="feedback">
-                                                                <button class="reply">
-                                                                    <i class="fas fa-reply"></i>
-                                                                    REPLY
-                                                                </button>
-                                                                <button class="quote">
-                                                                <i class="fas fa-quote-right"></i>
-                                                                    QUOTE
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="comment-content">
-                                            <ul class="comments__list">
-                                                <li class="comment">
-                                                    <div class="comments__item">
-                                                        <div class="comments__autor">
-                                                            <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/117251156_780671119335149_3490588943834725576_o.jpg?_nc_cat=110&ccb=2&_nc_sid=09cbfe&_nc_ohc=w7TVQWb0pt8AX8PGAJo&_nc_ht=scontent.fsgn5-3.fna&oh=4a755a559aad9f474aab31f662f3effb&oe=5FF117A3" alt="" class="comments__avatar">
-                                                            <div class="box-info-1">
-                                                                <a href="" class="comments__name">
-                                                                    Tống Hoàng
-                                                                </a>
-                                                                <span class="comments__time">2020-11-30 08:12:45</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="comments__text">
-                                                            <div class="content_of_comment">
-                                                                Đĩnh của đĩnh
-                                                            </div>
-                                                        </div>
-                                                        <div class="comments__actions">
-                                                            <div class="comments__rate">
-                                                                <button>
-                                                                    <i class="fas fa-thumbs-up like"></i>
-                                                                    0
-                                                                </button>
-                                                                <button>
-                                                                <i class="fas fa-thumbs-down dislike"></i>
-                                                                    0
-                                                                </button>
-                                                            </div>
-                                                            <div class="feedback">
-                                                                <button class="reply">
-                                                                    <i class="fas fa-reply"></i>
-                                                                    REPLY
-                                                                </button>
-                                                                <button class="quote">
-                                                                <i class="fas fa-quote-right"></i>
-                                                                    QUOTE
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <div class="comment__main" idphim="{{$idphim}}">                                         
+                                        </div>                                       
                                     </div>
                                     <div class="reviews">
                                         <div class="comment-content">

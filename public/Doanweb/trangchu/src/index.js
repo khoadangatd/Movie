@@ -1,23 +1,4 @@
 $(function(){
-    //Own-carousel slide
-    // $('.owl-carousel').owlCarousel({
-    //     loop:true,
-    //     margin:10,
-    //     nav:true,
-    //     dots:false,
-    //     navText:['<span class="header-slide-btn header-slide-left"><i class="fas fa-arrow-left"></i></span>','<span class="header-slide-btn header-slide-right"><i class="fas fa-arrow-right"></i></span>'],
-    //     responsive:{
-    //         0:{
-    //             items:1
-    //         },
-    //         600:{
-    //             items:3
-    //         },
-    //         1000:{
-    //             items:5
-    //         }
-    //     }
-    // })
     var widthItem=parseFloat($(".slide-item").innerWidth());
     var view=$(".slide-wrap");
     var countI=$(".slide-item").length;
@@ -62,7 +43,12 @@ $(function(){
     //switch-movie-list
     // khoi tao
     $(".list-tab-movie").html("<div class='loading'><img class='loading__img' src='https://www.bluechipexterminating.com/wp-content/uploads/2020/02/loading-gif-png-5.gif'></div>");
-    $.post("http://localhost:8000/Doanweb/trangchu/fetchMovie.php",{
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+    $.post("/ajaxmovie",{
         theloai:1
     },function(data,status){
         $(".list-tab-movie").html(data);
@@ -72,7 +58,7 @@ $(function(){
         $('.movie-navigation-item').filter('.movie-navigation-active').removeClass('movie-navigation-active');
         $(this).addClass('movie-navigation-active');
         var theloai=parseInt($(this).attr("data-value"));
-        $.post("http://localhost:8000/Doanweb/trangchu/fetchMovie.php",{
+        $.post("/ajaxmovie",{
             theloai
         },function(data,status){
             $(".list-tab-movie").html(data);
