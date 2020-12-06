@@ -1,4 +1,23 @@
 $(function(){
+     //Own-carousel slide
+     $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:30,
+        nav:true,
+        dots:false,
+        navText:['<span class="header-slide-btn header-slide-left"><i class="fas fa-arrow-left"></i></span>','<span class="header-slide-btn header-slide-right"><i class="fas fa-arrow-right"></i></span>'],
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    })
     //initial pagination
     var i;
     var page=parseInt($(".pagination").attr("page"));
@@ -93,5 +112,23 @@ $(function(){
     //         QUOTE
     //     </button>
     // </div>
+
+
+    // MODAL IMAGE
+    if($(window).click(function(){
+        
+    }))
+    $(".card-movie-img2").click(function(){
+        $(".modal").toggle();
+        
+        $(".modal").click(function(){
+            $(".modal").toggle();
+        });
+        $("#quit").click(function(){
+            (".modal").toggle();
+        });
+    })
 })
+
+
 

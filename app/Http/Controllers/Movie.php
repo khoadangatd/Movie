@@ -56,16 +56,15 @@ class Movie extends Controller
      * @return \Illuminate\Http\Response
      */
     public function ajaxpost(Request $request)
-    {
-        //
-        // $content=$request->contentC;
-        // $bl= new comment;
-        // $bl->iduser=session('user')->id;
-        // $bl->idphim=$request->idphim;
-        // $bl->comment=$content;
-        // $bl->like=0;
-        // $bl->dislike=0;
-        // $bl->save();
+    {       
+        $content=$request->contentC;
+        $bl= new comment;
+        $bl->iduser=session('user')->id;
+        $bl->idphim=$request->idphim;
+        $bl->comment=$content;
+        $bl->like=0;
+        $bl->dislike=0;
+        $bl->save();
         return 123;
     }
     public function ajaxcomment(Request $request){
@@ -73,7 +72,6 @@ class Movie extends Controller
         $main="";
         foreach($comments as $comment)
         {
-            $create=$comment->create_at;
             $main.="<div class='comment-content'>
                         <ul class='comments__list'>
                             <li class='comment'>

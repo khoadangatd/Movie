@@ -143,6 +143,36 @@ Phim
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <p class="film-title">Diễn viên phim {{$info['title']}}</p>
+                </div>
+                <div class="col-12">
+                    <div class="owl-carousel owl-theme">
+                        @foreach($info['credits']['cast'] as $actor)                    
+                            <div class="item">
+                                <a href="/actor/{{$actor['id']}}" class="card-movie">
+                                    @if(isset($actor['profile_path']))
+                                        <img src="https://image.tmdb.org/t/p/w500/{{$actor['profile_path']}}" alt="" class="card-movie-img">
+                                    @else  
+                                        <img src=" https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg  " alt="" class="card-movie-img">                 
+                                    @endif
+                                </a>
+                                <p class="actor-name slide-movie-title">
+                                    {{$actor['original_name']}}
+                                </p>
+                                <p class="actor-name slide-movie-title-engl">
+                                    {{$actor['character']}}
+                                </p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="film-content-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
                     <p class="film-title">Nội dung phim {{$info['title']}}</p>
                     <p class = "film-content-2__text">
                         <strong>Phim {{$info['title']}}</strong>
@@ -150,29 +180,25 @@ Phim
                         <strong>{{$info['original_title']}}</strong>
                         {{$info['overview']}}
                     </p>
-                    <div class="tag-content">
-                        <a href="">
-                            <i class="fas fa-tag"></i>
-                            Phimnhanh - Xem Phim nhanh - Phim Hay Nhất
-                        </a>
-                        <a href="">
-                            <i class="fas fa-tag"></i>
-                             Vuighe - Xem Phim Phim Tình Cảm - Hài Hước
-                        </a>
-                        <a href=""> 
-                            <i class="fas fa-tag"></i>
-                            cuộc gọi
-                        </a>
-                        <a href="">
-                            <i class="fas fa-tag"></i>
-                            call
-                        </a>
-                        <a href="">
-                            <i class="fas fa-tag"></i>
-                            the call
-                        </a>
-                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="film-content-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="film-title">Hình ảnh phim {{$info['title']}}</p>
+                </div>
+                @foreach($info['images']['backdrops'] as $image)
+                <div class="col-4 film--img-bd">
+                    @if(isset($image['file_path']))
+                        <img src="https://image.tmdb.org/t/p/w500/{{$image['file_path']}}" alt="" class="card-movie-img2">
+                    @else  
+                        <img src=" https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg  " alt="" class="card-movie-img2">                 
+                    @endif
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -183,7 +209,7 @@ Phim
                     <div class="col-12">
                         <p class="content__title">Để lại đánh giá của bạn</p>
                         <ul class="nav">
-                            <li class="nav-item nav-item__comment active" data-value = ".comments">BÌNH LUẬN</li>
+                            <li class="nav-item nav-item__comment nav-active" data-value = ".comments">BÌNH LUẬN</li>
                             <li class="nav-item nav-item__review" data-value = ".reviews">REVIEWS</li>
                         </ul>
                     </div>
@@ -277,153 +303,40 @@ Phim
                         <div class="col-12">
                             <p class="section__title">Có thể bạn thích...</p>
                         </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                    <i class="far fa-play-circle"></i>
-                                    </a>
+                        @if(count($info['similar']['results'])>8)
+                            @for($i=0;$i<8;$i++)
+                                <div class="col-6">
+                                    <div class="card">
+                                        <div class="card-cover">
+                                            @if(isset($info['similar']['results'][$i]['poster_path']))
+                                                <img src="https://image.tmdb.org/t/p/w500/{{$info['similar']['results'][$i]['poster_path']}}" alt="" class="img-film">
+                                            @else
+                                                <img src="https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg" alt="" class="img-film">
+                                            @endif
+                                            <span class="quality-1">HD</span>
+                                            <a href="/movie/{{$info['similar']['results'][$i]['id']}}" class="card__play">
+                                            <i class="far fa-play-circle"></i>
+                                            </a>
+                                        </div>
+                                        <div class="card__content">
+                                            <span class="cart-title">
+                                                <a href="">{{$info['similar']['results'][$i]['title']}}</a>
+                                            </span>
+                                            <span class="title_origin">{{$info['similar']['results'][$i]['release_date']}}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                        <i class="far fa-play-circle"></i>
-                                    </a>
-                                </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                        <i class="far fa-play-circle"></i>
-                                    </a>
-                                </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                        <i class="far fa-play-circle"></i>
-                                    </a>
-                                </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                        <i class="far fa-play-circle"></i>
-                                    </a>
-                                </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                        <i class="far fa-play-circle"></i>
-                                    </a>
-                                </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                        <i class="far fa-play-circle"></i>
-                                    </a>
-                                </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-cover">
-                                    <img src="https://xemphimplus.net/images/img_poster/tim-thay-con.medium.webp" alt="" class="img-film">
-                                    <span class="quality-1">HD</span>
-                                    <span class="time">102 phút</span>
-                                    <a href="" class="card__play">
-                                        <i class="far fa-play-circle"></i>
-                                    </a>
-                                </div>
-                                <div class="card__content">
-                                    <span class="cart-title">
-                                        <a href="">Tìm Thấy Con</a>
-                                    </span>
-                                    <span class="title_origin">Lost, Found</span>
-                                </div>
-                            </div>
-                        </div>
+                            @endfor
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal">
+        <div class="modal-img">
+            <img src="https://image.tmdb.org/t/p/original//gPucRIw0n3MPv7r1FEdMpngNXr7.jpg" alt="" class="modal-img__main">
+            <i class="fas fa-times" id="quit"></i>                                                 
+        </div> 
     </div>
 @endsection
