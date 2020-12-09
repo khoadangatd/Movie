@@ -130,6 +130,9 @@
     justify-content: center;
     margin: 10px 0;
 }
+.not-act{
+    cursor: default !important;
+}
 .watch-eps button{
     outline: none;
     border: none;
@@ -531,6 +534,10 @@
     left:0;
     z-index: 100;
     display:none;
+}
+
+.cmt-noti{
+    color:white;
 }
 
 .modal-img{

@@ -115,32 +115,29 @@ Phim
                 <?php
                     $ten=""; 
                     $urlD="https://api.themoviedb.org/3/movie/".$movie['id']."?api_key=12baa83af9302206b6af65913d262a81&language=en-US";
-                    $curl = curl_init();
-                    curl_setopt_array($curl, array(
-                      CURLOPT_URL => $urlD,
-                      CURLOPT_RETURNTRANSFER => true,
-                      CURLOPT_TIMEOUT => 30,
-                      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                      CURLOPT_CUSTOMREQUEST => "GET",
-                      CURLOPT_HTTPHEADER => array(
-                        "cache-control: no-cache"
-                      ),
-                    ));
-                    $detail = curl_exec($curl);
-                    curl_close($curl);
+                    $detail=file_get_contents($urlD);
                     $detail=json_decode($detail);
-                    if(isset($detail->spoken_languages[0]))
-                        $qg=$detail->spoken_languages[0]->english_name;
-                    else
-                        $qg="Chưa xác định";
-                    if($detail->runtime==0)
-                        $detail->runtime="Sắp ra mắt";
-                    else
-                        $detail->runtime="Thời gian : ".$detail->runtime." phút";
-                    foreach($detail->genres as $genres)
+                    if(isset($detail->success))
                     {
-                        $ten=$ten.$genres->name." ";
+                        $qg="Chưa xác định";
+                        $detail->runtime="Chưa xác định";
+                        $ten="Chưa xác định";
                     }
+                    else{
+                        if(isset($detail->spoken_languages[0]))
+                            $qg=$detail->spoken_languages[0]->english_name;
+                        else
+                            $qg="Chưa xác định";
+                        if($detail->runtime==0)
+                            $detail->runtime="Sắp ra mắt";
+                        else
+                            $detail->runtime="Thời gian : ".$detail->runtime." phút";
+                        foreach($detail->genres as $genres)
+                        {
+                            $ten=$ten.$genres->name." ";
+                        }
+                    }
+                    
                 ?>
                 <div class='col-6 mt-5 d-flex'>
                     <a href='/movie/{{$movie["id"]}}'>
@@ -170,7 +167,11 @@ Phim
                             iMDb {{$movie["vote_average"]}}
                         </p>
                         <p class='movie-content-title-engl'>
-                            {{$movie["release_date"]}}
+                            @if(isset($movie["release_date"]))
+                                {{$movie["release_date"]}}
+                            @else
+                                Chưa xác định
+                            @endif
                         </p>
                         <p class='movie-content-desc'>
                             {{$movie["overview"]}}
@@ -181,7 +182,7 @@ Phim
                 
                 <div class="col-12" style='text-align:center'>
                     @if(isset($keyword))
-                    <div class="pagination" page={{$page}} keyword={{$keyword}} totalP={{$total}}>
+                    <div class="pagination" page={{$page}} keyword='{{$keyword}}' totalP={{$total}}>
                     @else
                     <div class="pagination" page={{$page}}>
                     @endif

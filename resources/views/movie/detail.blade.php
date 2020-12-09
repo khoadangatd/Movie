@@ -4,14 +4,14 @@
     <link rel="stylesheet" href="{{ asset('Doanweb/movie/detail.css')}}?v=<?php echo time(); ?>"> 
 @endsection
 @section('js')
-    <script src="{{ asset('Doanweb/movie/movie.js')}}"></script>
+    <script src="{{ asset('Doanweb/movie/movie.js')}}?v=<?php echo time(); ?>"></script>
 @endsection
 @section('title')
 Phim
 @endsection
 @section('section')    
        <div class="details">
-        <div class= "background" style="background-image: url('https://image.tmdb.org/t/p/w500/{{$info['poster_path']}}'); background-repeat : no-repeat; background-size : cover;background-position: center">
+        <div class= "background" style="background-image: url('https://image.tmdb.org/t/p/w500/{{$info['poster_path']}}'); background-repeat: no-repeat; background-size : cover;background-position: center">
             <div class="background-detail">
                 <div class="container">
                     <div class="row">
@@ -30,7 +30,7 @@ Phim
                                 <div class="col-7 film-details">
                                     <div class="row box-info">
                                         <div class="col-4 box-info__img">
-                                            <img src="https://image.tmdb.org/t/p/w500/{{$info['poster_path']}}" alt="">
+                                            <img src="https://image.tmdb.org/t/p/w500/{{$info['poster_path']}}" alt="" id="movie-poster">
                                             <i class="far fa-play-circle play-film"></i>
                                         </div>
                                         <div class="col-8 box-info__content">
@@ -93,18 +93,37 @@ Phim
                                                     </li>
                                                 </ul>
                                                 <div class = "watch">
-                                                    <a href="" class="watch-eps">
-                                                        <button class = " select-1"> 
-                                                        <i class="fas fa-video"></i> Xem phim
-                                                        </button>
-                                                    </a>
-                                                    <a href="" class="watch-eps">
-                                                        <form action="" method="post">
+                                                    @if(session()->has('user'))
+                                                        @if(isset($liking))
+                                                            <div href="" class="watch-eps">
+                                                                <button class = " select-1"> 
+                                                                <i class="fas fa-video"></i> Xem phim
+                                                                </button>
+                                                            </div>
+                                                            <div class="watch-eps">
+                                                                <button class = " select-1 not-act"> 
+                                                                    <i class="fas fa-heart"></i> Đã yêu thích
+                                                                </button>
+                                                            </div>
+                                                        @else
+                                                            <div href="" class="watch-eps">
+                                                                <button class = " select-1"> 
+                                                                <i class="fas fa-video"></i> Xem phim
+                                                                </button>
+                                                            </div>
+                                                            <div class="watch-eps">
+                                                                <button class = " select-1 favorite"> 
+                                                                    <i class="fas fa-heart"></i> Yêu thích
+                                                                </button>
+                                                            </div>
+                                                        @endif             
+                                                    @else
+                                                        <a href="" class="watch-eps">
                                                             <button class = " select-1"> 
-                                                                <i class="fas fa-heart"></i> Yêu thích
+                                                            <i class="fas fa-video"></i> Xem phim
                                                             </button>
-                                                        </form>
-                                                    </a>
+                                                        </a>
+                                                    @endif
                                                 </div>
                                         </div>
                                     </div>
@@ -225,14 +244,15 @@ Phim
                                 <div class="col-12">
                                     <div class="comments active-1">
                                         <div class="comment-form">
-                                            <form action="" class="form form-comment" method="POST">
+                                            <div class="form form-comment">
                                                 <div class="content-quote"></div>
-                                                <textarea name="comment--content" id="" cols="30" rows="10" class="form__textarea" id="comment--content" required placeholder = "Để lại bình luận của bạn..."></textarea>
-                                                <button type = "submit" class="form__btn" id="post--comment">GỬI</button>
-                                            </form>
+                                                <textarea name="comment--content" cols="30" rows="10" class="form__textarea" id="comment-content" placeholder = "Để lại bình luận của bạn..."></textarea>
+                                                <button class="form__btn" id="post--comment">GỬI</button>
+                                                <span class="cmt-noti"></span>
+                                            </div>
                                         </div>
                                         <div class="comment__main" idphim="{{$idphim}}">                                         
-                                        </div>                                       
+                                        </div>                                     
                                     </div>
                                     <div class="reviews">
                                         <div class="comment-content">

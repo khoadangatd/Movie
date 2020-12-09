@@ -18,6 +18,8 @@ Route::get('/profile/{id}','App\Http\Controllers\Profile@index');
 Route::post('/updateuser','App\Http\Controllers\Profile@updateuser')->name('updateuser');
 
 Route::post('/updatepassword','App\Http\Controllers\Profile@updatepassword')->name('updatepassword');
+
+Route::get('/showfavorite','App\Http\Controllers\Profile@showfavorite')->name('showfavorite');
 // 
 Route::get('/logout','App\Http\Controllers\Login@logout')->name('logout');
 
@@ -36,12 +38,17 @@ Route::get('/movie','App\Http\Controllers\Movie@index');
 Route::get('/movie/{id}','App\Http\Controllers\Movie@show');
 
 // Comment
-Route::post('/ajaxpost','App\Http\Controllers\Movie@ajaxpost')->name('ajaxpost');
-
 Route::post('/ajaxcomment','App\Http\Controllers\Movie@ajaxcomment')->name('ajaxcomment');
+
+Route::post('/ajaxinteract','App\Http\Controllers\Movie@ajaxinteract')->name('ajaxinteract');
+
+Route::post('/ajaxpost','App\Http\Controllers\Movie@ajaxpost')->name('ajaxpost');
 
 Route::get('/actor','App\Http\Controllers\Actor@index');
 
 Route::get('/actor/{id}','App\Http\Controllers\Actor@show');
 
+// Yêu thích
+
+Route::post('/favorite','App\Http\Controllers\Movie@favorite')->name('favorite');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Liking;
 
 class Profile extends Controller
 {
@@ -11,6 +12,22 @@ class Profile extends Controller
     public function index($id){
         $user = User::find($id);
         return view('profile.index')->with("Nuser",$user);
+    }
+    public function showfavorite(Request $request){
+        $fvs=Liking::where("iduser","=",$request->iduser)->get();
+        $main="";
+        foreach($fvs as $fv)
+        {
+            $main.="<div class='main__film col-lg-2'>
+                        <a href='/movie/$fv->idmovie'>
+                            <img src='$fv->poster' alt='' class='main__film__img'>
+                        </a>
+                        <p class='main__detail__namefilm'>
+                            $fv->title
+                        </p>
+                    </div>";
+        }
+        return $main;
     }
     public function updateuser(Request $request){
         $tenuser=$request->input('nametk');

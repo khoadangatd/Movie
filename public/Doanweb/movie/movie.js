@@ -64,7 +64,7 @@ $(function(){
         // next page 
     
         $('.pagination__btn-right').click(function(){
-            if(page==10)
+            if(page==total)
                 return;
             window.location.href=`/movie?p=${page+1}&k=${keyword}`;
         })
@@ -75,19 +75,19 @@ $(function(){
         })  
     }
     $('.nav-item__comment').click(function(){
-        $(this).addClass('active');
-        $('.nav-item__review').removeClass('active');
+        $(this).addClass('nav-active');
+        $('.nav-item__review').removeClass('nav-active');
         $('.comments').addClass('active-1');
         $('.reviews').removeClass('active-1');
     })
     $('.nav-item__review').click(function(){
-        $(this).addClass('active');
-        $('.nav-item__comment').removeClass('active');
+        $(this).addClass('nav-active');
+        $('.nav-item__comment').removeClass('nav-active');
         $('.reviews').addClass('active-1');
         $('.comments').removeClass('active-1');
     })
     var idphim=$(".comment__main").attr("idphim");
-    var contentC=$("#comment--content").val();
+    var idcmt=$('.comment-content').attr('idcmt');
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -97,10 +97,49 @@ $(function(){
         $(".comment__main").html(data);
     })
     $("#post--comment").click(function(){
-        $.post('/ajaxpost'),{contentC,idphim},function(data,status){
-            $(".comment__main").html(data);
+        var contentC=$("#comment-content").val();
+        if(contentC=="")
+        {
+            $(".cmt-noti").html("Bạn chưa nhập bình luận!!");
         }
+        $.post("/ajaxpost",{idphim,contentC},function(data,status){
+            $.post("/ajaxcomment",{idphim},function(data,status){
+                $(".comment__main").html(data);
+            })
+        })
     })
+    $(".favorite").click(function(){
+        var poster = $("#movie-poster").attr('src');
+        var nameP= $(".name-film").html();
+        $.post("/favorite",{idphim,poster,nameP},function(data,status){
+            swal({
+                title:"Bạn đã yêu thích phim này",
+                text:"<3",
+                icon:"info"
+            });
+        })
+        $(this).html("<i class='fas fa-heart'></i> Đã yêu thích")
+        $(this).removeClass("favorite");
+        $(this).unbind();
+    })
+    
+    // $("#cmt-like").click(function(){
+    //     var like=$(this).attr('like');
+    //     console.log("123");
+    //     $.post("/ajaxinteract",{idcmt,like},function(data,status){
+    //         $.post("/ajaxcomment",{idphim},function(data,status){
+    //             $(".comment__main").html(data);
+    //         })
+    //     })
+    // })
+    // $("#cmt-dislike").click(function(){
+    //     var dislike=$(this).attr('dislike');    
+    //     $.post("/ajaxinteract",{idcmt,dislike},function(data,status){
+    //         $.post("/ajaxcomment",{idphim},function(data,status){
+    //             $(".comment__main").html(data);
+    //         })
+    //     })
+    // })
     // use REPLY
     // <div class='feedback'>
     //     <button class='reply'>
@@ -115,18 +154,18 @@ $(function(){
 
 
     // MODAL IMAGE
-    if($(window).click(function(){
-        
+    if($(window).click(function(e){
+        if(e.target==document.querySelector('.modal')){
+            e.target.style.display='none';
+        }
     }))
     $(".card-movie-img2").click(function(){
-        $(".modal").toggle();
-        
-        $(".modal").click(function(){
-            $(".modal").toggle();
-        });
-        $("#quit").click(function(){
-            (".modal").toggle();
-        });
+        $(".modal").css('display','block');
+        $img=$(this).attr('src').replace("/w500","/original")
+        $(".modal-img__main").attr('src',$img);
+    })
+    $('#quit').click(function(){
+        $('.modal').css('display','none');
     })
 })
 

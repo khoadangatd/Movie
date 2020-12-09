@@ -133,15 +133,7 @@
             <div class="container">
                 <div class="main__detail__child__contain">
                     <h2 class="main__detail__title">Phim yêu thích của bạn</h2>
-                    <div class="row">
-                        <div class="main__film col-lg-2">
-                            <a href="">
-                                <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
-                            </a>
-                            <p class="main__detail__namefilm">
-                                Joker
-                            </p>
-                        </div>
+                    <div class="row favorite-show" iduser="{{$Nuser->id}}">
                     </div>
                 </div> 
             </div>
@@ -166,15 +158,7 @@
             <div class="container">
                 <div class="main__detail__child__contain">
                     <h2 class="main__detail__title">Phim yêu thích của {{$Nuser->tenuser}}</h2>
-                    <div class="row">
-                        <div class="main__film col-lg-2">
-                            <a href="">
-                                <img src="https://image.tmdb.org/t/p/w500//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg" alt="" class="main__film__img">
-                            </a>
-                            <p class="main__detail__namefilm">
-                                Joker
-                            </p>
-                        </div>
+                    <div class="row favorite-show" iduser="{{$Nuser->id}}">
                     </div>
                 </div> 
             </div>
