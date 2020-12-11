@@ -7,7 +7,7 @@
     <script src="{{ asset('Doanweb/movie/movie.js')}}?v=<?php echo time(); ?>"></script>
 @endsection
 @section('title')
-Phim
+{{$info['title']}}
 @endsection
 @section('section')    
        <div class="details">
@@ -95,20 +95,20 @@ Phim
                                                 <div class = "watch">
                                                     @if(session()->has('user'))
                                                         @if(isset($liking))
-                                                            <div href="" class="watch-eps">
+                                                            <div class="watch-eps">
                                                                 <button class = " select-1"> 
                                                                 <i class="fas fa-video"></i> Xem phim
                                                                 </button>
                                                             </div>
                                                             <div class="watch-eps">
                                                                 <button class = " select-1 not-act"> 
-                                                                    <i class="fas fa-heart"></i> Đã yêu thích
+                                                                    <i class="fas fa-heart"></i> Đã yêu thích 
                                                                 </button>
                                                             </div>
                                                         @else
-                                                            <div href="" class="watch-eps">
+                                                            <div class="watch-eps">
                                                                 <button class = " select-1"> 
-                                                                <i class="fas fa-video"></i> Xem phim
+                                                                <i class="fas fa-video"></i> Xem phim 
                                                                 </button>
                                                             </div>
                                                             <div class="watch-eps">

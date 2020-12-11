@@ -78,13 +78,13 @@ class Movie extends Controller
                                 <li class='comment'>
                                     <div class='comments__item'>
                                         <div class='comments__autor'>
+                                            <a href='/profile/$comment->iduser' class='comments__name'>
                                             <img src='https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg' alt='' class='comments__avatar'>
-                                            <div class='box-info-1'>
-                                                <a href='' class='comments__name'>
-                                                    $comment->tenuser
-                                                </a>
+                                            <div class='box-info-1'>                                               
+                                                $comment->tenuser                                               
                                                 <span class='comments__time'>$comment->created_at</span>
                                             </div>
+                                            </a>
                                         </div>
                                         <div class='comments__text'>
                                             <div class='content_of_comment'>
@@ -139,14 +139,16 @@ class Movie extends Controller
         //
         $url="https://api.themoviedb.org/3/movie/$id?api_key=12baa83af9302206b6af65913d262a81&language=en-US&append_to_response=credits,similar,images&include_image_language=en";
         $response=Http::get($url)->json();
-        $lk=Liking::join('users',"users.id","=","likings.iduser")->where('likings.idmovie',"=",$id)->get();
-        $count=Liking::join('users',"users.id","=","likings.iduser")->where('likings.idmovie',"=",$id)->count();
-        if($count>0){
-            return view('movie.detail')->with('info',$response)->with('idphim',$id)->with('liking',$lk);
+        if(isset(session('user')->id))
+        {
+            $count=Liking::join('users',"users.id","=","likings.iduser")->where('likings.idmovie',"=",$id,"and")->where('users.id',"=",session('user')->id)->count();
+            if($count>0){
+                return view('movie.detail')->with('info',$response)->with('idphim',$id)->with('liking',"liked");
+            }
+            return view('movie.detail')->with('info',$response)->with('idphim',$id);
         }
         return view('movie.detail')->with('info',$response)->with('idphim',$id);
     }
-
     /**
      * Show the form for editing the specified resource.
      *

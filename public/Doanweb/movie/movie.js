@@ -105,6 +105,7 @@ $(function(){
         $.post("/ajaxpost",{idphim,contentC},function(data,status){
             $.post("/ajaxcomment",{idphim},function(data,status){
                 $(".comment__main").html(data);
+
             })
         })
     })
@@ -112,11 +113,6 @@ $(function(){
         var poster = $("#movie-poster").attr('src');
         var nameP= $(".name-film").html();
         $.post("/favorite",{idphim,poster,nameP},function(data,status){
-            swal({
-                title:"Bạn đã yêu thích phim này",
-                text:"<3",
-                icon:"info"
-            });
         })
         $(this).html("<i class='fas fa-heart'></i> Đã yêu thích")
         $(this).removeClass("favorite");
