@@ -18,95 +18,6 @@ Trang Chủ
             </div>
             <div class="row">
                 <div class="col-12">
-                    <!-- <div class="owl-carousel owl-theme custom-owl">
-                        <div class="item">
-                            <a href='#' class="card-movie">
-                                <img src="https://xemphimplus.net/images/img_poster/co-gai-nhim-cua-toi.medium.webp" alt="" class="card-movie-img">
-                                <div class="card-movie-icon">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </a>   
-                            <p class="slide-movie-title">
-                             Ly Nhân Tâm Thượng
-                            </p>
-                            <p class="slide-movie-title-engl">
-                             Closer to You (2020)
-                            </p>
-                        </div>
-                        <div class="item">
-                            <a href='#' class="card-movie">
-                                <img src="https://xemphimplus.net/images/img_poster/sac-dep-doi-tra.medium.webp" alt="" class="card-movie-img">
-                                <div class="card-movie-icon">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </a>   
-                            <p class="slide-movie-title">
-                             Ly Nhân Tâm Thượng
-                            </p>
-                            <p class="slide-movie-title-engl">
-                             Closer to You (2020)
-                            </p>
-                        </div>
-                        <div class="item">
-                            <a href='#' class="card-movie">
-                                <img src="https://xemphimplus.net/images/img_poster/ban-trai-toi-la-ho-ly.medium.webp" alt="" class="card-movie-img">
-                                <div class="card-movie-icon">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                                <span class="quality">FullHD</span>
-                            </a>   
-                            <p class="slide-movie-title">
-                             Ly Nhân Tâm Thượng
-                            </p>
-                            <p class="slide-movie-title-engl">
-                             Closer to You (2020)
-                            </p>
-                        </div>
-                        <div class="item">
-                            <a href='#' class="card-movie">
-                                <img src="https://xemphimplus.net/images/img_poster/ly-nhan-tam-thuong.medium.webp" alt="" class="card-movie-img">
-                                <div class="card-movie-icon">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                                <span class="quality">FullHD</span>
-                            </a>   
-                            <p class="slide-movie-title">
-                             Ly Nhân Tâm Thượng
-                            </p>
-                            <p class="slide-movie-title-engl">
-                             Closer to You (2020)
-                            </p>
-                        </div>   
-                        <div class="item">
-                            <a href='#' class="card-movie">
-                                <img src="https://xemphimplus.net/images/img_poster/luu-ly-my-nhan-sat.medium.webp" alt="" class="card-movie-img">
-                                <div class="card-movie-icon">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                                <span class="quality">FullHD</span>
-                            </a>   
-                            <p class="slide-movie-title">
-                             Ly Nhân Tâm Thượng
-                            </p>
-                            <p class="slide-movie-title-engl">
-                             Closer to You (2020)
-                            </p>
-                        </div>   
-                        <div class="item">
-                            <a href='#' class="card-movie">
-                                <img src="https://xemphimplus.net/images/img_poster/nu-than-chien-binh-1984.medium.webp" alt="" class="card-movie-img">
-                                <div class="card-movie-icon">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </a>   
-                            <p class="slide-movie-title">
-                             Ly Nhân Tâm Thượng
-                            </p>
-                            <p class="slide-movie-title-engl">
-                             Closer to You (2020)
-                            </p>
-                        </div>    
-                    </div> -->
                     <div class="slide-view">
                         <div class="slide-wrap">
                             @for($i=0;$i<10;$i++)                           
@@ -121,7 +32,7 @@ Trang Chủ
                                     {{$popular[$i]['title']}}
                                 </p>
                                 <p class="slide-movie-title-engl">
-                                {{$popular[$i]['title']}}
+                                {{$popular[$i]['original_title']}}
                                 </p>
                             </div>
                             @endfor
@@ -145,7 +56,7 @@ Trang Chủ
                     Phim Mới Nhất
                 </li>
                 <li class="movie-navigation-item" data-value='2'>
-                    Phim Lẻ
+                    Phim Kinh Điển
                 </li>
                 <li class="movie-navigation-item" data-value='3'>
                     Phim bộ
@@ -656,7 +567,7 @@ Trang Chủ
 <div class="movie-new-update">
     <div class="container">
         <h3 class="movie-title">
-            Nổi bật
+            Mới cập nhật
         </h3>
         <div class="row mt-5">
             @for($i=0;$i<18;$i++)
@@ -673,7 +584,7 @@ Trang Chủ
                                 {{$popular[$i]['title']}}
                             </p>
                             <p class="movie-new-update-item-des-title-engl">
-                                {{$popular[$i]['release_date']}}
+                                {{$popular[$i]['original_title']}}
                             </p>
                         </div>
                     </div>

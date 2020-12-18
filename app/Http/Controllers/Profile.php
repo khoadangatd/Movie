@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Liking;
+use Illuminate\Support\Facades\Http;
 
 class Profile extends Controller
 {
@@ -18,14 +19,26 @@ class Profile extends Controller
         $main="";
         foreach($fvs as $fv)
         {
-            $main.="<div class='main__film col-lg-2'>
-                        <a href='/movie/$fv->idmovie'>
-                            <img src='$fv->poster' alt='' class='main__film__img'>
-                        </a>
-                        <p class='main__detail__namefilm'>
-                            $fv->title
-                        </p>
-                    </div>";
+            if($fv->idtv==0){
+                $main.="<div class='main__film col-lg-2'>
+                            <a href='/movie/$fv->idmovie'>
+                                <img src='$fv->poster' alt='' class='main__film__img'>
+                            </a>
+                            <p class='main__detail__namefilm'>
+                                $fv->title
+                            </p>
+                        </div>";
+            }
+            else{
+                 $main.="<div class='main__film col-lg-2'>
+                            <a href='/tvshow/$fv->idtv'>
+                                <img src='$fv->poster' alt='' class='main__film__img'>
+                            </a>
+                            <p class='main__detail__namefilm'>
+                                $fv->title
+                            </p>
+                        </div>";
+            }
         }
         return $main;
     }

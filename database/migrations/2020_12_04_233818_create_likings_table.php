@@ -19,6 +19,7 @@ class CreateLikingsTable extends Migration
             $table->foreign('iduser')->references('id')->on('users');
             $table->string('poster');
             $table->integer('idmovie');
+            $table->integer('idtv');
             $table->string('title');
             $table->timestamps();
         });

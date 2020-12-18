@@ -2,12 +2,13 @@
 @extends('layout.dash')
 @section('css')
     <link rel="stylesheet" href="{{ asset('Doanweb/movie/detail.css')}}?v=<?php echo time(); ?>"> 
-@endsection
+    <link rel="stylesheet" href="{{ asset('Doanweb/movie/watchMovie.css')}}?v=<?php echo time(); ?>"> 
+    @endsection
 @section('js')
-    <script src="{{ asset('Doanweb/movie/movie.js')}}?v=<?php echo time(); ?>"></script>
+    <script src="{{ asset('Doanweb/movie/watchMovie.js')}}?v=<?php echo time(); ?>"></script>
 @endsection
 @section('title')
-{{$info['title']}}
+Xem phim {{$info['title']}}
 @endsection
 @section('section')    
        <div class="details">
@@ -15,150 +16,54 @@
             <div class="background-detail">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
-                            <p class = "location">
-                                <a href="{{asset('/')}}">Trang chủ</a>
-                                <i class="fas fa-arrow-right"></i>
-                                <a href="{{asset('/movie?p=1')}}">Phim</a>
-                                <i class="fas fa-arrow-right"></i>
-                                <span>{{$info['title']}}</span>
-                            </p>
-                            <p class="name-film">{{$info['title']}}</p>
+                       <div class="col-9">
+                           <div class="watch-movie-play">
+                               <iframe style='width:100%;height:600px' src="https://www.youtube.com/embed/{{$info['videos']['results'][0]['key']}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                           </div>
+                           <div class="watch-movie-play-menu">
+                               <h3 class="watch-movie-play-menu-title">
+                                   Chọn tập phim
+                               </h3>
+                               <ul class="watch-movie-play-menu-list">
+                                   <li class="watch-movie-play-menu-item">
+                                       1
+                                   </li>
+                                   <li class="watch-movie-play-menu-item">
+                                       2
+                                   </li>
+                               </ul>
+                               <div class="watch-movie-play-menu-category">
+                                   <span>
+                                       Thuyết Minh
+                                   </span>
+                                   <span>
+                                        Vietsub
+                                   </span>
+                               </div>
+                           </div>
                         </div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-7 film-details">
-                                    <div class="row box-info">
-                                        <div class="col-4 box-info__img">
-                                            <img src="https://image.tmdb.org/t/p/w500/{{$info['poster_path']}}" alt="" id="movie-poster">
-                                            <i class="far fa-play-circle play-film"></i>
-                                        </div>
-                                        <div class="col-8 box-info__content">
-                                            <div class="film-content">
-                                                <ul class="film-meta">
-                                                    <li>
-                                                        <span>Tên gốc:  </span>
-                                                        <p class="css-1">{{$info['original_title']}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <span>Thể loại:  </span>
-                                                        @foreach($info['genres'] as $genre)
-                                                        <p class="css-1">{{$genre['name']}}</p>
-                                                        @endforeach
-                                                    </li>
-                                                    <li>
-                                                        <span>Năm phát hành:  </span>
-                                                        <p class="css-1">{{$info['release_date']}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <span>Thời lượng:   </span>
-                                                        <p class="css-1">{{$info['runtime']}} phút</p>
-                                                    </li>
-                                                    <li>
-                                                        <span>Ngôn ngữ:  </span>
-                                                        <p class="css-1">{{$info['spoken_languages'][0]["english_name"]}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <span>Đạo diễn: </span>
-                                                        <p class="css-1">{{$info['credits']['crew'][0]['name']}}</p>
-                                                    </li>
-                                                    <li>
-                                                        <span>Diễn viên:  </span>
-                                                        @for($i=0;$i<5;$i++)
-                                                            <p class="css-1">
-                                                                {{$info['credits']['cast'][$i]['name']}}
-                                                                @if($i!=4)
-                                                                ,
-                                                                @endif
-                                                            </p>
-                                                        @endfor
-                                                    </li>
-                                                    <li>
-                                                        <span>Đánh giá phim:  </span>
-                                                        <span class="rate">
-                                                            <i class="fas fa-star rate-act"></i>
-                                                            <i class="fas fa-star rate-act"></i>
-                                                            <i class="fas fa-star rate-act"></i>
-                                                            <i class="fas fa-star rate-act"></i>
-                                                            <i class="fas fa-star rate-act"></i>
-                                                        </span>
-                                                        <span class="rated">
-                                                            (
-                                                            <i class="fas fa-star rate-act rate-act__color"></i>
-                                                            <span class="rating-score">2.5</span>
-                                                            /
-                                                            <span class="total_rating">6</span>
-                                                            lượt)
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                                <div class = "watch">
-                                                    @if(session()->has('user'))
-                                                        @if(isset($liking))
-                                                            <a href="/watchmovie/{{$info['id']}}">
-                                                                <div class="watch-eps">
-                                                                    <button class = " select-1"> 
-                                                                    <i class="fas fa-video"></i> Xem phim
-                                                                    </button>
-                                                                </div>
-                                                            </a>
-                                                            <div class="watch-eps">
-                                                                <button class = " select-1 not-act"> 
-                                                                    <i class="fas fa-heart"></i> Đã yêu thích 
-                                                                </button>
-                                                            </div>
-                                                        @else
-                                                            <a href="/watchmovie/{{$info['id']}}">
-                                                                <div class="watch-eps">
-                                                                    <button class = " select-1"> 
-                                                                    <i class="fas fa-video"></i> Xem phim
-                                                                    </button>
-                                                                </div>
-                                                            </a>
-                                                            <div class="watch-eps">
-                                                                <button class = " select-1 favorite"> 
-                                                                    <i class="fas fa-heart"></i> Yêu thích
-                                                                </button>
-                                                            </div>
-                                                        @endif             
-                                                    @else
-                                                        <a href="/watchmovie/{{$info['id']}}">
-                                                            <div class="watch-eps">
-                                                                <button class = " select-1"> 
-                                                                <i class="fas fa-video"></i> Xem phim
-                                                                </button>
-                                                            </div>
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="col-5 trailer d-flex align-items-end">
-                                    <div class="support css-2">
-                                        <div class = "love">
-                                            <button>
-                                                <i class="fas fa-thumbs-up "></i>
-                                                    Thích
-                                            </button>
-                                            <button>
-                                                Chia sẻ
-                                            </button>
-                                            <span class = "text-1">Tống Đức Hoàng</span>
-                                            <span class = "text-2">và 68k người khác thích nội dung này</span>
-                                        </div>
-                                        <div class="share">
-                                            <span>Share: </span>
-                                            <i class="fab fa-facebook-square facebook"></i>
-                                            <i class="fab fa-instagram-square insta"></i>
-                                            <i class="fab fa-twitter twitter"></i>
-                                            <i class="fab fa-youtube youtube"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                       <div class="col-3">
+                            <div class="watch-movie-menu">
+                                <h3 class="movie-movie-title">
+                                    Nổi Bật
+                                </h3>
+                                <ul class="watch-movie-filter">
+                                    <li class="watch-movie-filter-item watch-movie-filter-item-active" data=1>
+                                        Ngày
+                                    </li>
+                                    <li class="watch-movie-filter-item" data=2>
+                                       Tuần 
+                                    </li>
+                                    <li class="watch-movie-filter-item" data=3>
+                                        Tháng
+                                    </li>
+
+                                </ul>
                             </div>
-                        </div>
+                            <ul class="watch-movie-list">
+                               
+                            </ul>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -206,24 +111,6 @@
                         {{$info['overview']}}
                     </p>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="film-content-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <p class="film-title">Hình ảnh phim {{$info['title']}}</p>
-                </div>
-                @foreach($info['images']['backdrops'] as $image)
-                <div class="col-4 film--img-bd">
-                    @if(isset($image['file_path']))
-                        <img src="https://image.tmdb.org/t/p/w500/{{$image['file_path']}}" alt="" class="card-movie-img2">
-                    @else  
-                        <img src=" https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg  " alt="" class="card-movie-img2">                 
-                    @endif
-                </div>
-                @endforeach
             </div>
         </div>
     </div>
@@ -358,11 +245,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal">
-        <div class="modal-img">
-            <img src="https://image.tmdb.org/t/p/original//gPucRIw0n3MPv7r1FEdMpngNXr7.jpg" alt="" class="modal-img__main">
-            <i class="fas fa-times" id="quit"></i>                                                 
-        </div> 
     </div>
 @endsection

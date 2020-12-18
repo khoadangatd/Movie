@@ -9,5 +9,5 @@ class Liking extends Model
 {
     use HasFactory;
     protected $table="likings";
-    protected $fillable=["iduser,poster,idmovie,title"];
+    protected $fillable=["iduser,poster,idmovie,idtv,title"];
 }

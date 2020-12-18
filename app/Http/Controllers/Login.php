@@ -20,7 +20,7 @@ class Login extends Controller
         if($count>0){
             session()->put("user",$user[0]);
             session()->put("message",["Đăng nhập thành công","Cùng tận hưởng nào","success"]);
-            return redirect('');
+            return redirect("");
         }
         session()->put("message",["Đăng nhập thất bại","Mật khẩu hoặc tài khoản của bạn không đúng","error"]);
         return redirect('/form');

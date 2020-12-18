@@ -23,7 +23,7 @@ Route::get('/showfavorite','App\Http\Controllers\Profile@showfavorite')->name('s
 // 
 Route::get('/logout','App\Http\Controllers\Login@logout')->name('logout');
 
-Route::get('/form','App\Http\Controllers\Login@index')->name('form');
+Route::get('/form','App\Http\Controllers\Login@index')->name('form')->middleware('checkuser');;
 
 Route::post('/register','App\Http\Controllers\Login@register')->name('register');
 
@@ -33,9 +33,21 @@ Route::get('/','App\Http\Controllers\Home@index')->name('home');
 
 Route::post('/ajaxmovie','App\Http\Controllers\Home@ajax')->name('ajaxmovie');
 
-Route::get('/movie','App\Http\Controllers\Movie@index');
+Route::get('/movie','App\Http\Controllers\Movie@index')->name('new');
 
 Route::get('/movie/{id}','App\Http\Controllers\Movie@show');
+
+Route::get('/tvshow/{id}','App\Http\Controllers\Movie@tvshow');
+
+Route::post('/ajaxgetmoviepopular','App\Http\Controllers\Movie@ajaxGetMoviePopular');
+
+Route::get('/watchmovie/{id}','App\Http\Controllers\Movie@playMovie');
+// 
+Route::get('/tvshow','App\Http\Controllers\ListMovie@tvshow')->name('tvshow');
+
+Route::get('/toprate','App\Http\Controllers\ListMovie@toprate')->name('toprate');
+
+Route::get('/theater','App\Http\Controllers\ListMovie@theater')->name('theater');
 
 // Comment
 Route::post('/ajaxcomment','App\Http\Controllers\Movie@ajaxcomment')->name('ajaxcomment');
@@ -52,3 +64,4 @@ Route::get('/actor/{id}','App\Http\Controllers\Actor@show');
 
 Route::post('/favorite','App\Http\Controllers\Movie@favorite')->name('favorite');
 
+Route::post('/favoriteTV','App\Http\Controllers\Movie@favoriteTV')->name('favoriteTV');

@@ -18,8 +18,8 @@ class CheckUser
     {
         if(session()->has('user'))
         {
-            return $next($request);
+            return redirect('');
         }
-        return redirect('form');
+        return $next($request);
     }
 }

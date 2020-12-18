@@ -42,15 +42,19 @@ Diễn viên
                 @foreach($actors as $actor) 
                 <div class="col-lg-3 main__actor__item">
                     <a href="/actor/{{$actor['id']}}">
-                        <img src="https://image.tmdb.org/t/p/w500/{{$actor['profile_path']}}" alt="" class="main__actor__img">
+                        @if(isset($actor['profile_path']))
+                            <img src="https://image.tmdb.org/t/p/w500/{{$actor['profile_path']}}" alt="" class="main__actor__img">
+                        @else
+                            <img src="https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg" alt="" class="main__actor__img">
+                        @endif
                     </a>
                     <div class="main__actor__name">{{$actor['name']}}</div>
                     <div class="main__actor__film">
                         @foreach($actor['known_for'] as $film)
-                            @if(isset($film['title']))
-                                {{$film['title']}}.
-                            @elseif(isset($film['original_name']))
+                            @if(isset($film['original_name']))
                                 {{$film['original_name']}}.
+                            @elseif(isset($film['title']))
+                                {{$film['title']}}.
                             @endif
                         @endforeach
                     </div>

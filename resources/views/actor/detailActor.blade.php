@@ -49,7 +49,11 @@
         <div class="row">
             <div class="col-4">
                 <div class="actor-profile-img-wrap">
-                    <img src="https://image.tmdb.org/t/p/w500/{{$actor['profile_path']}}" alt="" class="actor-profile-img">
+                    @if(isset($actor['profile_path']))
+                        <img src="https://image.tmdb.org/t/p/w500/{{$actor['profile_path']}}" alt="" class="actor-profile-img">
+                    @else        
+                        <img src="https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg" alt="" class="actor-profile-img">
+                    @endif
                     <div class="actor-profile-social">
                         <i class="fab fa-facebook-square"></i>
                         <i class="fab fa-instagram-square"></i>
@@ -73,23 +77,18 @@
                         </h3>
                         <ul class="actor-detail-related-img-list">
                             @for ($i=1;$i<6;$i++) <li class="actor-detail-related-img-item">
-                                @if(!isset($actor['movie_credits']['cast'][$i]['poster_path']))
                                 <a href="/movie/{{$actor['movie_credits']['cast'][$i]['id']}}">
-                                    <img src="https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg" alt="" class="actor-detail-related-img">
-                                </a>
-                                <p class="actor-detail-related-img-name">
-                                    {{($actor['movie_credits']['cast'][$i]['original_title'])}}
-                                </p>
-                                @else
-                                <a href="/movie/{{$actor['movie_credits']['cast'][$i]['id']}}">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{($actor['movie_credits']['cast'][$i]['poster_path'])}}" alt="" class="actor-detail-related-img">
+                                    @if(!isset($actor['movie_credits']['cast'][$i]['poster_path']))
+                                        <img src="https://titanliner.com/wp-content/uploads/2019/02/empty-img.jpg" alt="" class="actor-detail-related-img">
+                                    @else
+                                        <img src="https://image.tmdb.org/t/p/w500/{{($actor['movie_credits']['cast'][$i]['poster_path'])}}" alt="" class="actor-detail-related-img">
+                                    @endif
                                 </a>
                                 <p class="actor-detail-related-img-name">
                                     {{($actor['movie_credits']['cast'][$i]['original_title'])}}
                                 </p>
                                 </li>
-                                @endif
-                                @endfor
+                            @endfor
                         </ul>
                     </div>
                 </div>

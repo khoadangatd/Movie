@@ -22,14 +22,16 @@ $(function(){
     var i;
     var page=parseInt($(".pagination").attr("page"));
     console.log(page);
+    console.log(window.location.href);
     var temp;
     let content='';
+    var url=window.location.href.replace(page,"");
     if($(".pagination").attr("keyword")==null){
         for(i=1;i<=10;i++){
             if(i==page)
-                content+=`<a href="/movie?p=${i}" class="pagination__btn pagination__btn--active">${i}</a>`;
+                content+=`<a href="${url}${i}" class="pagination__btn pagination__btn--active">${i}</a>`;
             else
-                content+=`<a href="/movie?p=${i}" class="pagination__btn">${i}</a>`;
+                content+=`<a href="${url}${i}" class="pagination__btn">${i}</a>`;
         }
         $(".pagination-custom").append(content);
     
@@ -38,12 +40,12 @@ $(function(){
         $('.pagination__btn-right').click(function(){
             if(page==10)
                 return;
-            window.location.href=`/movie?p=${page+1}`;
+                window.location.href=window.location.href.replace(page,page+1);
         })
         $('.pagination__btn-left').click(function(){
             if(page==1)
                 return;
-            window.location.href=`/movie?p=${page-1}`;
+                window.location.href=window.location.href.replace(page,page-1);
         })  
     }
     else{
@@ -66,12 +68,12 @@ $(function(){
         $('.pagination__btn-right').click(function(){
             if(page==total)
                 return;
-            window.location.href=`/movie?p=${page+1}&k=${keyword}`;
+            window.location.href=window.location.href.replace(page,page+1);
         })
         $('.pagination__btn-left').click(function(){
             if(page==1)
                 return;
-            window.location.href=`/movie?p=${page-1}&k=${keyword}`;
+            window.location.href=window.location.href.replace(page,page-1);
         })  
     }
     $('.nav-item__comment').click(function(){
@@ -92,9 +94,29 @@ $(function(){
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-      });
+    });
+    function interact(){
+        $("#cmt-like").click(function(){
+            var like=parseInt($(this).attr('like'));          
+            $.post("/ajaxinteract",{idcmt,like},function(data,status){
+                console.log("123");
+                $.post("/ajaxcomment",{idphim},function(data,status){
+                    $(".comment__main").html(data);
+                })
+            })
+        })
+        $("#cmt-dislike").click(function(){
+            var dislike=parseInt($(this).attr('dislike'));    
+            $.post("/ajaxinteract",{idcmt,dislike},function(data,status){
+                $.post("/ajaxcomment",{idphim},function(data,status){
+                    $(".comment__main").html(data);
+                })
+            })
+        })
+    }
     $.post("/ajaxcomment",{idphim},function(data,status){
         $(".comment__main").html(data);
+        interact();
     })
     $("#post--comment").click(function(){
         var contentC=$("#comment-content").val();
@@ -102,40 +124,37 @@ $(function(){
         {
             $(".cmt-noti").html("Bạn chưa nhập bình luận!!");
         }
-        $.post("/ajaxpost",{idphim,contentC},function(data,status){
-            $.post("/ajaxcomment",{idphim},function(data,status){
-                $(".comment__main").html(data);
-
+        else{
+            $("#comment-content").val("");
+            $.post("/ajaxpost",{idphim,contentC},function(data,status){
+                $.post("/ajaxcomment",{idphim},function(data,status){
+                    $(".comment__main").html(data);
+                    interact();
+                })
             })
-        })
+        }
     })
     $(".favorite").click(function(){
         var poster = $("#movie-poster").attr('src');
         var nameP= $(".name-film").html();
         $.post("/favorite",{idphim,poster,nameP},function(data,status){
+            console.log("123");
         })
         $(this).html("<i class='fas fa-heart'></i> Đã yêu thích")
         $(this).removeClass("favorite");
         $(this).unbind();
     })
+    $(".favoriteTV").click(function(){
+        var poster = $("#movie-poster").attr('src');
+        var nameP= $(".name-film").html();
+        $.post("/favoriteTV",{idphim,poster,nameP},function(data,status){
+        })
+        $(this).html("<i class='fas fa-heart'></i> Đã yêu thích")
+        $(this).removeClass("favoriteTV");
+        $(this).unbind();
+    })
     
-    // $("#cmt-like").click(function(){
-    //     var like=$(this).attr('like');
-    //     console.log("123");
-    //     $.post("/ajaxinteract",{idcmt,like},function(data,status){
-    //         $.post("/ajaxcomment",{idphim},function(data,status){
-    //             $(".comment__main").html(data);
-    //         })
-    //     })
-    // })
-    // $("#cmt-dislike").click(function(){
-    //     var dislike=$(this).attr('dislike');    
-    //     $.post("/ajaxinteract",{idcmt,dislike},function(data,status){
-    //         $.post("/ajaxcomment",{idphim},function(data,status){
-    //             $(".comment__main").html(data);
-    //         })
-    //     })
-    // })
+   
     // use REPLY
     // <div class='feedback'>
     //     <button class='reply'>

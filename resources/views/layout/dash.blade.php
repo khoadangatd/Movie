@@ -7,38 +7,75 @@
         </a>
         <ul class="navigation">
             <li class="navigation-item">
-                <a href="" class="navigation-link">
+                <a href="{{route('new')}}?p=1" class="navigation-link">
                     PHIM MỚI        
                 </a>
             </li>
             <li class="navigation-item">
-                <a href="" class="navigation-link">
+                <a href="{{route('tvshow')}}?p=1" class="navigation-link">
                     PHIM BỘ
                 </a>
                 </li>
 
             <li class="navigation-item">
-                <a href="" class="navigation-link">
-                PHIM LẺ
+                <a href="{{route('toprate')}}?p=1" class="navigation-link">
+                    PHIM KINH ĐIỂN
                 </a>
             </li>
 
             <li class="navigation-item">
-                <a href="" class="navigation-link">
+                <a href="{{route('theater')}}?p=1" class="navigation-link">
                     PHIM CHIẾU RẠP
-                    </a>
-
+                </a>
             </li>
             <li class="navigation-item">
             <a href="" class="navigation-link">
                 THỂ LOẠI
                 </a>
             </li>
-
-            <li class="navigation-item">
-            <a href="" class="navigation-link">
-                QUỐC GIA
-                </a>
+            <li style="position:relative" class="navigation-item nation">
+                <span  style='cursor:pointer' class="navigation-link nation-link">
+                    QUỐC GIA
+                </span>
+                <div class="dropdown-nation">
+                    <ul class="dropdown-nation-list">
+                        <li class="dropdown-nation-item">
+                            <a href="#" class="dropdown-nation-link">
+                                Trung Quốc
+                            </a>
+                        </li>
+                        <li class="dropdown-nation-item">
+                            <a href="#" class="dropdown-nation-link">
+                                Mỹ
+                            </a>
+                        </li>
+                        <li class="dropdown-nation-item">
+                            <a href="#" class="dropdown-nation-link">
+                               Hàn Quốc 
+                            </a>
+                        </li>
+                        <li class="dropdown-nation-item">
+                            <a href="#" class="dropdown-nation-link">
+                                Châu Âu
+                            </a>
+                        </li>
+                        <li class="dropdown-nation-item">
+                            <a href="#" class="dropdown-nation-link">
+                                Nga
+                            </a>
+                        </li>
+                        <li class="dropdown-nation-item">
+                            <a href="#" class="dropdown-nation-link">
+                               Đài Loan
+                            </a>
+                        </li>
+                        <li class="dropdown-nation-item">
+                            <a href="#" class="dropdown-nation-link">
+                              Âu Mỹ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
             <li class="navigation-item">

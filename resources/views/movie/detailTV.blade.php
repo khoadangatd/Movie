@@ -7,7 +7,7 @@
     <script src="{{ asset('Doanweb/movie/movie.js')}}?v=<?php echo time(); ?>"></script>
 @endsection
 @section('title')
-{{$info['title']}}
+{{$info['name']}}
 @endsection
 @section('section')    
        <div class="details">
@@ -21,9 +21,9 @@
                                 <i class="fas fa-arrow-right"></i>
                                 <a href="{{asset('/movie?p=1')}}">Phim</a>
                                 <i class="fas fa-arrow-right"></i>
-                                <span>{{$info['title']}}</span>
+                                <span>{{$info['name']}}</span>
                             </p>
-                            <p class="name-film">{{$info['title']}}</p>
+                            <p class="name-film">{{$info['name']}}</p>
                         </div>
                         <div class="col-12">
                             <div class="row">
@@ -38,7 +38,7 @@
                                                 <ul class="film-meta">
                                                     <li>
                                                         <span>Tên gốc:  </span>
-                                                        <p class="css-1">{{$info['original_title']}}</p>
+                                                        <p class="css-1">{{$info['original_name']}}</p>
                                                     </li>
                                                     <li>
                                                         <span>Thể loại:  </span>
@@ -48,30 +48,39 @@
                                                     </li>
                                                     <li>
                                                         <span>Năm phát hành:  </span>
-                                                        <p class="css-1">{{$info['release_date']}}</p>
+                                                        <p class="css-1">{{$info['first_air_date']}}</p>
                                                     </li>
                                                     <li>
                                                         <span>Thời lượng:   </span>
-                                                        <p class="css-1">{{$info['runtime']}} phút</p>
+                                                        <p class="css-1">{{$info['episode_run_time'][0]}} phút</p>
                                                     </li>
                                                     <li>
                                                         <span>Ngôn ngữ:  </span>
                                                         <p class="css-1">{{$info['spoken_languages'][0]["english_name"]}}</p>
                                                     </li>
                                                     <li>
-                                                        <span>Đạo diễn: </span>
+                                                        <span>Đạo diễn:  </span>
                                                         <p class="css-1">{{$info['credits']['crew'][0]['name']}}</p>
                                                     </li>
                                                     <li>
                                                         <span>Diễn viên:  </span>
-                                                        @for($i=0;$i<5;$i++)
-                                                            <p class="css-1">
-                                                                {{$info['credits']['cast'][$i]['name']}}
-                                                                @if($i!=4)
-                                                                ,
-                                                                @endif
-                                                            </p>
-                                                        @endfor
+                                                        @if(count($info['credits']['cast'])<5)
+                                                        <p class="css-1">
+                                                            @foreach($info['credits']['cast'] as $cast)
+                                                                {{$cast['name']}}
+
+                                                            @endforeach
+                                                        </p>
+                                                        @else
+                                                            @for($i=0;$i<5;$i++)
+                                                                <p class="css-1">
+                                                                    {{$info['credits']['cast'][$i]['name']}}
+                                                                    @if($i!=4)
+                                                                    ,
+                                                                    @endif
+                                                                </p>
+                                                            @endfor
+                                                        @endif
                                                     </li>
                                                     <li>
                                                         <span>Đánh giá phim:  </span>
@@ -116,7 +125,7 @@
                                                                 </div>
                                                             </a>
                                                             <div class="watch-eps">
-                                                                <button class = " select-1 favorite"> 
+                                                                <button class = " select-1 favoriteTV"> 
                                                                     <i class="fas fa-heart"></i> Yêu thích
                                                                 </button>
                                                             </div>
@@ -168,7 +177,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="film-title">Diễn viên phim {{$info['title']}}</p>
+                    <p class="film-title">Diễn viên phim {{$info['name']}}</p>
                 </div>
                 <div class="col-12">
                     <div class="owl-carousel owl-theme">
@@ -198,11 +207,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="film-title">Nội dung phim {{$info['title']}}</p>
+                    <p class="film-title">Nội dung phim {{$info['name']}}</p>
                     <p class = "film-content-2__text">
-                        <strong>Phim {{$info['title']}}</strong>
+                        <strong>Phim {{$info['name']}}</strong>
                         -
-                        <strong>{{$info['original_title']}}</strong>
+                        <strong>{{$info['original_name']}}</strong>
                         {{$info['overview']}}
                     </p>
                 </div>
@@ -213,7 +222,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="film-title">Hình ảnh phim {{$info['title']}}</p>
+                    <p class="film-title">Hình ảnh phim {{$info['name']}}</p>
                 </div>
                 @foreach($info['images']['backdrops'] as $image)
                 <div class="col-4 film--img-bd">
@@ -346,9 +355,9 @@
                                         </div>
                                         <div class="card__content">
                                             <span class="cart-title">
-                                                <a href="">{{$info['similar']['results'][$i]['title']}}</a>
+                                                <a href="">{{$info['similar']['results'][$i]['name']}}</a>
                                             </span>
-                                            <span class="title_origin">{{$info['similar']['results'][$i]['release_date']}}</span>
+                                            <span class="title_origin">{{$info['similar']['results'][$i]['first_air_date']}}</span>
                                         </div>
                                     </div>
                                 </div>

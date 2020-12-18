@@ -17,7 +17,7 @@ class Actor extends Controller
         //
         if(isset($request->p)&&$request->p<11)
         {
-            $response = Http::get('https://api.themoviedb.org/3/person/popular?api_key=12baa83af9302206b6af65913d262a81&language=en-US&page='.$request->p)->json()['results'];
+            $response = Http::get('https://api.themoviedb.org/3/person/popular?api_key=12baa83af9302206b6af65913d262a81&language=vi&page='.$request->p)->json()['results'];
             return view("actor.index")->with("actors",$response)->with("page",$request->p);
         }   
         else{
