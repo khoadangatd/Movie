@@ -61,15 +61,22 @@ Diễn viên
                 </div>
                 @endforeach
                 <div class="col-12" style='text-align:center'>
-                    <div class="pagination" page={{$page}}>
+                    <div class="pagination" page={{$page}} totalP={{$total}}>
+                         <a href="/actor?p=1" class="pagination__btn">
+                            <i class="fas fa-angle-double-left"></i></span>
+                        </a>
                         <span class="pagination__btn pagination__btn-left"><i class="fas fa-angle-left"></i></span>
                         <div class="pagination-custom">
                             
                         </div>
                         <span class="pagination__btn pagination__btn-right"><i class="fas fa-angle-right"></i></span>
+                        <a href="/actor?p={{$total}}" class="pagination__btn">
+                            <i class="fas fa-angle-double-right"></i></span>
+                        </a>
                     </div>
                 </div>
             </div>
+            <div style="text-align:center; margin-bottom:30px">Có {{$total}} trang tìm thấy</div>
         </div>
     </div>
 </div>

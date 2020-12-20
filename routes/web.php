@@ -41,7 +41,7 @@ Route::get('/tvshow/{id}','App\Http\Controllers\Movie@tvshow');
 
 Route::post('/ajaxgetmoviepopular','App\Http\Controllers\Movie@ajaxGetMoviePopular');
 
-Route::get('/watchmovie/{id}','App\Http\Controllers\Movie@playMovie');
+Route::post('/playmovie','App\Http\Controllers\Movie@playMovie');
 // 
 Route::get('/tvshow','App\Http\Controllers\ListMovie@tvshow')->name('tvshow');
 

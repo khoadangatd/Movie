@@ -21,15 +21,27 @@ $(function(){
     //initial pagination
     var i;
     var page=parseInt($(".pagination").attr("page"));
-    console.log(page);
-    console.log(window.location.href);
-    var temp;
     let content='';
     var url=window.location.href.replace(page,"");
+    var total=parseInt($(".pagination").attr("totalP"));
+    var bd,kt;
+    if(page%5==0){
+        bd=page-1;
+        kt=bd+5;
+    }
+    else{
+        var temp=page%5;
+        bd=page-temp;
+        kt=bd+5;
+    }
     if($(".pagination").attr("keyword")==null){
-        for(i=1;i<=10;i++){
+        for(i=bd;i<=kt;i++){           
             if(i==page)
                 content+=`<a href="${url}${i}" class="pagination__btn pagination__btn--active">${i}</a>`;
+            else if(i==0)
+                continue;
+            else if(i>total)
+                break;
             else
                 content+=`<a href="${url}${i}" class="pagination__btn">${i}</a>`;
         }
@@ -38,26 +50,27 @@ $(function(){
         // next page 
     
         $('.pagination__btn-right').click(function(){
-            if(page==10)
+            if(page==total)
                 return;
-                window.location.href=window.location.href.replace(page,page+1);
+            window.location.href=window.location.href.replace(page,page+1);
         })
         $('.pagination__btn-left').click(function(){
             if(page==1)
                 return;
-                window.location.href=window.location.href.replace(page,page-1);
+            window.location.href=window.location.href.replace(page,page-1);
         })  
     }
     else{
         var keyword=$(".pagination").attr("keyword");
-        var total=parseInt($(".pagination").attr("totalP"));
-        if(total>10)
-        {
-            total=10;
-        }
-        for(i=1;i<=total;i++){
+        if(total<5)
+            kt=total;
+        for(i=bd;i<=kt;i++){
             if(i==page)
                 content+=`<a href="/movie?p=${i}&k=${keyword}" class="pagination__btn pagination__btn--active">${i}</a>`;
+            else if(i==0)
+                continue;
+            else if(i>total)
+                break;
             else
                 content+=`<a href="/movie?p=${i}&k=${keyword}" class="pagination__btn">${i}</a>`;
         }
@@ -89,29 +102,34 @@ $(function(){
         $('.comments').removeClass('active-1');
     })
     var idphim=$(".comment__main").attr("idphim");
-    var idcmt=$('.comment-content').attr('idcmt');
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     function interact(){
-        $("#cmt-like").click(function(){
-            var like=parseInt($(this).attr('like'));          
+        $(".cmt-like").click(function(){
+            var idcmt=$(this).parent().parent().attr('idcmt');
+            console.log(idcmt);
+            var like=parseInt($(this).attr('like')); 
+            var crr=parseInt($(this).children().eq(1).html());
+            $(this).children().eq(1).html(crr+1);
             $.post("/ajaxinteract",{idcmt,like},function(data,status){
-                console.log("123");
-                $.post("/ajaxcomment",{idphim},function(data,status){
-                    $(".comment__main").html(data);
-                })
+                console.log(data);
             })
+            $(this).unbind();
         })
-        $("#cmt-dislike").click(function(){
+        $(".cmt-dislike").click(function(){
+            var idcmt=$(this).parent().parent().attr('idcmt');
+            console.log(idcmt);
+            var crr=parseInt($(this).children().eq(1).html());
+            console.log(crr);
+            $(this).children().eq(1).html(crr+1);
             var dislike=parseInt($(this).attr('dislike'));    
             $.post("/ajaxinteract",{idcmt,dislike},function(data,status){
-                $.post("/ajaxcomment",{idphim},function(data,status){
-                    $(".comment__main").html(data);
-                })
-            })
+                console.log(data);
+            }) 
+            $(this).unbind();
         })
     }
     $.post("/ajaxcomment",{idphim},function(data,status){
@@ -182,6 +200,42 @@ $(function(){
     $('#quit').click(function(){
         $('.modal').css('display','none');
     })
+
+
+
+    // watchmovie
+
+
+
+    $("#watchmovie").click(function(){
+        var TV=$(".details").attr("tv");
+        $.post('/playmovie',{idphim,TV},function(data,status){
+            $(".background").html(data);
+            $(".watch-movie-play-menu-item").click(function(){
+                vt=$(this).html();
+                $(".watch-movie-play-menu-item").removeClass("watch-movie-play-menu-item--active");
+                $(this).addClass("watch-movie-play-menu-item--active");
+                $(".main-video-watch").removeClass("main-video-watch--active");
+                $(".main-video-watch").eq(vt-1).addClass("main-video-watch--active");
+            });
+            $(".watch-movie-list").html("<div class='loading'><img class='loading__img' src='https://www.bluechipexterminating.com/wp-content/uploads/2020/02/loading-gif-png-5.gif'></div>");
+            $.post('/ajaxgetmoviepopular',{filter:"day"},function(data,status){
+                $('.watch-movie-list').html(data);
+            })
+            $('.watch-movie-filter-item').click(function(){
+                $('.watch-movie-filter-item-active').removeClass('watch-movie-filter-item-active');
+                $(this).addClass('watch-movie-filter-item-active');
+                $(".watch-movie-list").html("<div class='loading'><img class='loading__img' src='https://www.bluechipexterminating.com/wp-content/uploads/2020/02/loading-gif-png-5.gif'></div>");
+        
+                filter = $(this).attr('data');
+                $.post('/ajaxgetmoviepopular',{filter},function(data,status){
+                    $('.watch-movie-list').html(data);
+                    console.log(data);
+                })
+            })
+        })
+    })
+    // when click  
 })
 
 

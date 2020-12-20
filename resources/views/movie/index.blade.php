@@ -238,17 +238,34 @@ Phim
                 <div class="col-12" style='text-align:center'>
                     @if(isset($keyword))
                     <div class="pagination" page={{$page}} keyword='{{$keyword}}' totalP={{$total}}>
-                    @else
-                    <div class="pagination" page={{$page}}>
-                    @endif
+                        <a href="/movie?p=1&k={{$keyword}}" class="pagination__btn">
+                            <i class="fas fa-angle-double-left"></i></span>
+                        </a>
                         <span class="pagination__btn pagination__btn-left"><i class="fas fa-angle-left"></i></span>
                         <div class="pagination-custom">
-                            
                         </div>
                         <span class="pagination__btn pagination__btn-right"><i class="fas fa-angle-right"></i></span>
+                        <a href="/movie?p={{$total}}&k={{$keyword}}" class="pagination__btn">
+                            <i class="fas fa-angle-double-right"></i></span>
+                        </a>
                     </div>
+                    @else
+                    <div class="pagination" page={{$page}} totalP={{$total}}>
+                        <a href="/movie?p=1" class="pagination__btn">
+                            <i class="fas fa-angle-double-left"></i></span>
+                        </a>
+                        <span class="pagination__btn pagination__btn-left"><i class="fas fa-angle-left"></i></span>
+                        <div class="pagination-custom">
+                        </div>
+                        <span class="pagination__btn pagination__btn-right"><i class="fas fa-angle-right"></i></span>
+                        <a href="/movie?p={{$total}}" class="pagination__btn">
+                            <i class="fas fa-angle-double-right"></i></span>
+                        </a>
+                    </div>
+                    @endif
                 </div>
             </div>
+            <div style="text-align:center; margin-bottom:30px">Có {{$total}} trang tìm thấy</div>
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@
 {{$info['title']}}
 @endsection
 @section('section')    
-       <div class="details">
+    <div class="details">
         <div class= "background" style="background-image: url('https://image.tmdb.org/t/p/w500/{{$info['poster_path']}}'); background-repeat: no-repeat; background-size : cover;background-position: center">
             <div class="background-detail">
                 <div class="container">
@@ -95,12 +95,11 @@
                                                 <div class = "watch">
                                                     @if(session()->has('user'))
                                                         @if(isset($liking))
-                                                            <a href="/watchmovie/{{$info['id']}}">
-                                                                <div class="watch-eps">
-                                                                    <button class = " select-1"> 
-                                                                    <i class="fas fa-video"></i> Xem phim
-                                                                    </button>
-                                                                </div>
+                                                            <div class="watch-eps">
+                                                                <button class = " select-1" id="watchmovie"> 
+                                                                <i class="fas fa-video"></i> Xem phim
+                                                                </button>
+                                                            </div>
                                                             </a>
                                                             <div class="watch-eps">
                                                                 <button class = " select-1 not-act"> 
@@ -108,12 +107,11 @@
                                                                 </button>
                                                             </div>
                                                         @else
-                                                            <a href="/watchmovie/{{$info['id']}}">
-                                                                <div class="watch-eps">
-                                                                    <button class = " select-1"> 
-                                                                    <i class="fas fa-video"></i> Xem phim
-                                                                    </button>
-                                                                </div>
+                                                            <div class="watch-eps">
+                                                                <button class = " select-1" id="watchmovie"> 
+                                                                <i class="fas fa-video"></i> Xem phim
+                                                                </button>
+                                                            </div>
                                                             </a>
                                                             <div class="watch-eps">
                                                                 <button class = " select-1 favorite"> 
@@ -122,13 +120,11 @@
                                                             </div>
                                                         @endif             
                                                     @else
-                                                        <a href="/watchmovie/{{$info['id']}}">
-                                                            <div class="watch-eps">
-                                                                <button class = " select-1"> 
-                                                                <i class="fas fa-video"></i> Xem phim
-                                                                </button>
-                                                            </div>
-                                                        </a>
+                                                        <div class="watch-eps">
+                                                            <button class = " select-1" id="watchmovie"> 
+                                                            <i class="fas fa-video"></i> Xem phim
+                                                            </button>
+                                                        </div>
                                                     @endif
                                                 </div>
                                         </div>

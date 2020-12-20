@@ -19,16 +19,16 @@ class Movie extends Controller
         //\
         $url = 'https://api.themoviedb.org/3/movie/popular?api_key=12baa83af9302206b6af65913d262a81&language=vi&page=';
         $urlS = 'https://api.themoviedb.org/3/search/movie?api_key=04c35731a5ee918f014970082a0088b1&language=vi&include_adult=false';
-        if(isset($request->p)&&$request->p<11&&!isset($request->k)){            
-            $response = Http::get($url.$request->p)->json()['results'];            
-            return view('movie.index')->with('movies',$response)->with('page',$request->p)->with('title',"Phim mới nhất");
+        if(isset($request->p)&&!isset($request->k)){            
+            $response = Http::get($url.$request->p)->json();            
+            return view('movie.index')->with('movies',$response['results'])->with('page',$request->p)->with('title',"Phim mới nhất")->with('total',$response['total_pages']);
         }
         else if(isset($request->k)&&isset($request->p)&&$request->p<11){
             $response = Http::get($urlS."&query=".$request->k."&page=".$request->p)->json();
             return view('movie.index')->with('movies',$response['results'])->with('page',$request->p)->with('keyword',$request->k)->with('total',$response['total_pages']);
         }
-        else
-            return redirect("");
+        // else
+        //     return redirect("");
     }
     /**p
      * Show the form for creating a new resource.
@@ -69,11 +69,11 @@ class Movie extends Controller
     public function ajaxcomment(Request $request){
         if ($request->ajax())
         {
-            $comments=Comment::innerjoin('users',"users.id","=","comments.iduser")->where("idphim","=",$request->idphim)->orderBy('comments.created_at', 'DESC')->get();
+            $comments=Comment::join('users',"users.id","=","comments.iduser")->where("idphim","=",$request->idphim)->orderBy('comments.created_at', 'DESC')->get();
             $main="";
             foreach($comments as $comment)
             {
-                $main.="<div class='comment-content' idcmt='$comment->id'>
+                $main.="<div class='comment-content'>
                             <ul class='comments__list'>
                                 <li class='comment'>
                                     <div class='comments__item'>
@@ -91,15 +91,15 @@ class Movie extends Controller
                                                 $comment->comment
                                             </div>
                                         </div>
-                                        <div class='comments__actions'>
+                                        <div class='comments__actions' idcmt='$comment->idcmt'>
                                             <div class='comments__rate'>
-                                                <button id='cmt-like' like=$comment->like>
+                                                <button class='cmt-like' like=$comment->like>
                                                     <i class='fas fa-thumbs-up like'></i>
-                                                    $comment->like
+                                                    <span class='like-main'>$comment->like</span>
                                                 </button>
-                                                <button id='cmt-dislike' dislike=$comment->dislike>
-                                                <i class='fas fa-thumbs-down dislike'></i>
-                                                    $comment->dislike
+                                                <button class='cmt-dislike' dislike=$comment->dislike>
+                                                    <i class='fas fa-thumbs-down dislike'></i>
+                                                    <span class='dislike-main'>$comment->dislike</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -114,11 +114,12 @@ class Movie extends Controller
     }
     public function ajaxinteract(Request $request){
         if(isset($request->like)){
-            Comment::where('id','=',$request->idcmt)->update(['like'=>($request->like+1)]);
+            Comment::where('idcmt','=',$request->idcmt)->update(array('like'=>$request->like+1));
         }
         else if(isset($request->dislike)){
-            Comment::where('id','=',$request->idcmt)->update(array('dislike'=>$request->dislike+1));
+            Comment::where('idcmt','=',$request->idcmt)->update(array('dislike'=>$request->dislike+1));
         }
+        return $request->idcmt;
     }
     public function favorite(Request $request){
         $lk= new liking;    
@@ -139,14 +140,88 @@ class Movie extends Controller
         $lk->save();    
     }
     // Watch movie
-    public function playMovie($id)
+    public function playMovie(Request $request)
     {
         //
-        $urlNews = 'https://api.themoviedb.org/3/movie/top_rated?api_key=04c35731a5ee918f014970082a0088b1&language=vi&page=1';
-        $responseNew =Http::get($urlNews)->json();
-        $url="https://api.themoviedb.org/3/movie/$id?api_key=12baa83af9302206b6af65913d262a81&language=en-US&append_to_response=similar,videos,credits";
+        if(isset($request->TV))
+            $url="https://api.themoviedb.org/3/tv/$request->idphim?api_key=12baa83af9302206b6af65913d262a81&language=en-US&append_to_response=similar,videos,credits";
+        else
+            $url="https://api.themoviedb.org/3/movie/$request->idphim?api_key=12baa83af9302206b6af65913d262a81&language=en-US&append_to_response=similar,videos,credits";
         $response=Http::get($url)->json();
-        return view('movie.watchMovie')->with('info',$response)->with('idphim',$id)->with('response',$responseNew);
+        $content="<div class='background-detail'>
+                    <div class='container'>
+                        <div class='row'>
+                        <div class='col-9'>
+                            <div class='watch-movie-play'>";
+                            $temp=1;
+                            $count=0;
+                            foreach($response['videos']['results'] as $videokey)
+                            {
+                                $count++;
+                                $video=$videokey['key'];
+                                if($temp==1){
+                                    $content.="<iframe style='width:100%;height:600px;' class='main-video-watch main-video-watch--active' src='https://www.youtube.com/embed/$video' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"; 
+                                    $temp=0;
+                                }
+                                else
+                                    $content.="<iframe style='width:100%;height:600px' class='main-video-watch' src='https://www.youtube.com/embed/$video' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";                                        
+                            }
+                            $content.="</div>
+                            <div class='watch-movie-play-menu'>
+                                <h3 class='watch-movie-play-menu-title'>
+                                    Chọn tập phim
+                                </h3>
+                                <ul class='watch-movie-play-menu-list'>";
+                                for($i=1;$i<=$count;$i++){
+                                    if($i==1){
+                                        $content.="
+                                            <li class='watch-movie-play-menu-item watch-movie-play-menu-item--active'>
+                                                $i
+                                            </li>
+                                        ";
+                                    }
+                                    else{
+                                        $content.="
+                                        <li class='watch-movie-play-menu-item'>
+                                            $i
+                                        </li>
+                                        ";
+                                    }
+                                }
+                                $content.="
+                                </ul>
+                                <div class='watch-movie-play-menu-category'>
+                                    <span>
+                                        Trailer
+                                    </span>
+                                    <span>
+                                        Engsub
+                                    </span>
+                                </div>
+                            </div>
+                            </div>
+                        <div class='col-3'>
+                                <div class='watch-movie-menu'>
+                                    <h3 class='movie-movie-title'>
+                                        Nổi Bật
+                                    </h3>
+                                    <ul class='watch-movie-filter'>
+                                        <li class='watch-movie-filter-item watch-movie-filter-item-active' data='day'>
+                                            Ngày
+                                        </li>
+                                        <li class='watch-movie-filter-item' data='week'>
+                                            Tuần 
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class='watch-movie-list'>
+                                
+                                </ul>
+                        </div>
+                        </div>
+                    </div>
+                </div>";
+        return $content;
     }
     /**
      * Display the specified resource.
@@ -157,7 +232,7 @@ class Movie extends Controller
 
     public function ajaxGetMoviePopular(Request $request){
         $filter = $request->filter;
-        $url= "https://api.themoviedb.org/3/movie/top_rated?api_key=04c35731a5ee918f014970082a0088b1&language=vi&page=$filter";
+        $url= "https://api.themoviedb.org/3/trending/movie/$filter?api_key=12baa83af9302206b6af65913d262a81";
         $response=Http::get($url)->json();
         $data ='';
         for($i=0;$i<5;$i++){
@@ -183,7 +258,7 @@ class Movie extends Controller
                            $title
                     </h3>
                     <h3 class='watch-movie-item-desc-view'>
-                        $view.K lượt xem
+                        $view lượt xem
                     </h3>
                     <h3 class='movie-content-imbd'>
                         Điểm IMDb

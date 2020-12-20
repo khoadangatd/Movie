@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 
 class Actor extends Controller
 {
@@ -15,13 +16,14 @@ class Actor extends Controller
     public function index(Request $request)
     {
         //
-        if(isset($request->p)&&$request->p<11)
+        $response = Http::get('https://api.themoviedb.org/3/person/popular?api_key=12baa83af9302206b6af65913d262a81&language=vi&page='.$request->p)->json();
+        if(isset($request->p))
         {
-            $response = Http::get('https://api.themoviedb.org/3/person/popular?api_key=12baa83af9302206b6af65913d262a81&language=vi&page='.$request->p)->json()['results'];
-            return view("actor.index")->with("actors",$response)->with("page",$request->p);
+            return view("actor.index")->with("actors",$response['results'])->with("page",$request->p)->with('total',$response['total_pages']);;
         }   
-        else{
-            return redirect("");
+        else
+        {
+            return Redirect('');
         }
     }
 

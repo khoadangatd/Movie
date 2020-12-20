@@ -11,7 +11,7 @@
 Xem phim {{$info['title']}}
 @endsection
 @section('section')    
-       <div class="details">
+    <div class="details">
         <div class= "background" style="background-image: url('https://image.tmdb.org/t/p/w500/{{$info['poster_path']}}'); background-repeat: no-repeat; background-size : cover;background-position: center">
             <div class="background-detail">
                 <div class="container">
@@ -37,7 +37,7 @@ Xem phim {{$info['title']}}
                                        Thuyết Minh
                                    </span>
                                    <span>
-                                        Vietsub
+                                        Éng
                                    </span>
                                </div>
                            </div>
