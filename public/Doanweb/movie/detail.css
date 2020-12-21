@@ -721,8 +721,16 @@
     width: 80px;
     margin-top:40px;
 }
+.loading-bg{
+    height: 702px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading__img-bg{
+    width: 200px;
+}
 .loading{
-    
     text-align: center;
 }
 

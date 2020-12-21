@@ -48,7 +48,7 @@ class Home extends Controller
                     $ov=$value['overview'];
                     $ep=$detail['number_of_episodes'];
                     $response.="<div class='col-6 mt-5 d-flex'>
-                                    <a href='/movie/$id'>
+                                    <a href='/tvshow/$id'>
                                         <div class='movie-img'>
                                             <img src='https://image.tmdb.org/t/p/w500/$poster' alt='' class='movie-img-item'>
                                             <span class='quality'>FullHD</span>

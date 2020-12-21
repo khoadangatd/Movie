@@ -209,6 +209,7 @@ $(function(){
 
     $("#watchmovie").click(function(){
         var TV=$(".details").attr("tv");
+        $(".background").html("<div class='loading-bg'><img class='loading__img-bg' src='https://www.bluechipexterminating.com/wp-content/uploads/2020/02/loading-gif-png-5.gif'></div>")
         $.post('/playmovie',{idphim,TV},function(data,status){
             $(".background").html(data);
             $(".watch-movie-play-menu-item").click(function(){

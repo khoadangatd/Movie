@@ -60,7 +60,13 @@
                                                     </li>
                                                     <li>
                                                         <span>Đạo diễn:  </span>
-                                                        <p class="css-1">{{$info['credits']['crew'][0]['name']}}</p>
+                                                        <p class="css-1">
+                                                            @if(isset($info['credits']['crew'][0]['name']))
+                                                                {{$info['credits']['crew'][0]['name']}}
+                                                            @else
+                                                                Đang Cập Nhật
+                                                            @endif
+                                                        </p>
                                                     </li>
                                                     <li>
                                                         <span>Diễn viên:  </span>
