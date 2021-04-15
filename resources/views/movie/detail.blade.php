@@ -75,7 +75,7 @@
                                                     </li>
                                                     <li>
                                                         <span>Đánh giá phim:  </span>
-                                                        <span class="rate">
+                                                        <span class="rate" feedback={{(int)$info['vote_average']/2}}>
                                                             <i class="fas fa-star rate-act"></i>
                                                             <i class="fas fa-star rate-act"></i>
                                                             <i class="fas fa-star rate-act"></i>
@@ -84,10 +84,10 @@
                                                         </span>
                                                         <span class="rated">
                                                             (
+                                                                <span class="rating-score">{{(int)($info['vote_average']/2)}}</span>
                                                             <i class="fas fa-star rate-act rate-act__color"></i>
-                                                            <span class="rating-score">2.5</span>
                                                             /
-                                                            <span class="total_rating">6</span>
+                                                            <span class="total_rating">{{$info['vote_count']}}</span>
                                                             lượt)
                                                         </span>
                                                     </li>
@@ -127,6 +127,9 @@
                                                         </div>
                                                     @endif
                                                 </div>
+                                        </div>
+                                        <div class="box-info_imdb">
+                                            IMDb {{$info['vote_average']}}
                                         </div>
                                     </div>
                                     </div>

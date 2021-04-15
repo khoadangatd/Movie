@@ -6,8 +6,8 @@
             <div class="modal__box__heading">
                 <div class="modal__box__heading__item">
                 </div>
-                <button class="modal__box__btn">Log in</button>
-                <button class="modal__box__btn">Register</button>
+                <button class="modal__box__btn">Đăng nhập</button>
+                <button class="modal__box__btn">Đăng kí</button>
             </div>
             <div class="modal__box__logo">
                 <a href="{{asset('')}}">
@@ -29,14 +29,14 @@
                 @csrf  
                 <div class="modal__box__general modal__box--login">
                     <div class="modal__box__input">
-                        <input type="text" class="modal__box__input__main user" name="user" required placeholder="Username">
-                        <input type="password" class="modal__box__input__main password" name="password" required placeholder="Password">
+                        <input type="text" class="modal__box__input__main user" name="user" required placeholder="Nhập tài khoản">
+                        <input type="password" class="modal__box__input__main password" name="password" required placeholder="Nhập mật khẩu">
                     </div>
                     <!-- <div class="modal__box__remember">
                         <a href="">Forget your password</a>
                     </div> -->
                     <div class="modal__box__btn--login">
-                        <input type="submit" class="modal__box__btn--login__main" value="Log In" name="login">
+                        <input type="submit" class="modal__box__btn--login__main" value="Đăng nhập" name="login">
                     </div>
                 </div>
             </form>
@@ -44,12 +44,12 @@
                 @csrf 
                 <div class="modal__box__general modal__box--register">
                     <div class="modal__box__input">
-                        <input type="text" class="modal__box__input__main" name="user" id="Resuser" required placeholder="Username">
+                        <input type="text" class="modal__box__input__main" name="user" id="Resuser" required placeholder="Nhập tài khoản">
                         <input type="password" class="modal__box__input__main" name="password" id="Respassword" required placeholder="Nhập mật khẩu">
                         <input type="password" class="modal__box__input__main" name="password__confirm" id="password--confirm" required placeholder="Xác nhận mật khẩu">
                     </div>
                     <div class="modal__box__btn--login">
-                        <input type="submit" class="modal__box__btn--login__main" value="Register" name="register">
+                        <input type="submit" class="modal__box__btn--login__main" value="Đăng kí" name="register">
                     </div>
                 </div>
             </form>

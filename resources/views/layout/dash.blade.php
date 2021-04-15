@@ -28,10 +28,77 @@
                     PHIM CHIẾU RẠP
                 </a>
             </li>
-            <li class="navigation-item">
-            <a href="" class="navigation-link">
-                THỂ LOẠI
-                </a>
+            <li style="position:relative" class="navigation-item category">
+                <span  style='cursor:pointer' class="navigation-link category-link">
+                   THỂ LOẠI
+                </span>
+                <div class="dropdown-category">
+                    <ul class="dropdown-category-list">
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim hành động
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim tình cảm
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim hài hước
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim võ thuật
+                            </a>
+                        </ul>
+                        <ul class="dropdown-category-list">
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim hình sử
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim phiêu lưu
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim viễn tưởng
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim gia đình
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-category-list">
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim hoạt hình
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim phiêu lưu
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim cổ trang
+                            </a>
+                        </li>
+                        <li class="dropdown-category-item">
+                            <a href="#" class="dropdown-category-link">
+                                Phim tâm lý
+                            </a>
+                        </li>                   
+                    </ul>
+                </div>
             </li>
             <li style="position:relative" class="navigation-item nation">
                 <span  style='cursor:pointer' class="navigation-link nation-link">
@@ -109,6 +176,16 @@
                     <a href='{{route("logout")}}'><div class='Log-in__notify__item'>Đăng Xuất</div></a>
                     </div>
                 </div>
+            @elseif(session()->has('admin'))
+                    <div class='Log-in'>
+                            <span class='Log-in__text'>
+                                {{session('admin')->tenuser}}
+                            </span> 
+                            <div class='Log-in__notify'>
+                            <a href='{{route("admin")}}'><div class='Log-in__notify__item'>Bảng điều khiển</div></a>
+                            <a href='{{route("logout")}}'><div class='Log-in__notify__item'>Đăng Xuất</div></a>
+                        </div>
+                      </div>
             @else
                 <div class='NotLog-in'>
                     <a href="{{asset('form')}}">
@@ -342,4 +419,3 @@
     </div>
 </footer>
 @stop
-

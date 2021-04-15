@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Session;
 
 class Login extends Controller
 {
@@ -18,6 +17,10 @@ class Login extends Controller
         $user = User::where('username','=',$username,'and')->where('password','=',md5(sha1($password)))->get();
         $count = User::where('username','=',$username,'and')->where('password','=',md5(sha1($password)))->count();
         if($count>0){
+            if($username=='admin'){
+                session()->put("admin",$user[0]);
+                return redirect("");
+            }
             session()->put("user",$user[0]);
             session()->put("message",["Đăng nhập thành công","Cùng tận hưởng nào","success"]);
             return redirect("");
@@ -43,6 +46,7 @@ class Login extends Controller
     }
     public function logout(Request $request){
         session()->forget('user');
+        session()->forget('admin');
         return redirect("/");
     }
 }

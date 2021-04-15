@@ -46,14 +46,14 @@ class Profile extends Controller
         $tenuser=$request->input('nametk');
         $username=$request->input('username');
         $id=session('user')->id;       
-        $count = User::where('id','=',$id)->count();
-        if($count==0){
-            User::where('id','=',$id)->update(array('username'=>$username,'tenuser'=>$tenuser));
-            session()->put("message",["Cập nhật thành công","Tên người dùng và username đã được thay đổi","success"]);
-        }
-        else{
+        $count = User::where('username','=',$username)->count();
+        if($count>=1&&session('user')->username!=$username){
             User::where('id','=',$id)->update(array('tenuser'=>$tenuser));
             session()->put("message",["Cập nhật thất bại","Tên người dùng thay đổi. Username đã bị trùng","error"]);    
+        }
+        else{
+            User::where('id','=',$id)->update(array('username'=>$username,'tenuser'=>$tenuser));
+            session()->put("message",["Cập nhật thành công","Tên người dùng và username đã được thay đổi","success"]);
         }
         $put= User::where('id','=',$id)->get();
         session()->put('user',$put[0]);

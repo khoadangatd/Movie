@@ -76,7 +76,4 @@ $(function(){
                 "background-image": 'url('+src_bg+')',
             })
      })
-     $('.nation').click(function(){
-        $('.dropdown-nation').slideToggle('slow');
-    })
 })

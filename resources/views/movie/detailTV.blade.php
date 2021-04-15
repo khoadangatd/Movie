@@ -141,6 +141,9 @@
                                                     @endif
                                                 </div>
                                         </div>
+                                        <div class="box-info_imdb">
+                                            IMDb {{$info['vote_average']}}
+                                        </div>
                                     </div>
                                     </div>
                                 </div>

@@ -65,3 +65,7 @@ Route::get('/actor/{id}','App\Http\Controllers\Actor@show');
 Route::post('/favorite','App\Http\Controllers\Movie@favorite')->name('favorite');
 
 Route::post('/favoriteTV','App\Http\Controllers\Movie@favoriteTV')->name('favoriteTV');
+
+// Admin
+Route::get('/admin','App\Http\Controllers\Admin@index')->name('admin');
+Route::post('/admin','App\Http\Controllers\Admin@delete')->name('admin_delete');

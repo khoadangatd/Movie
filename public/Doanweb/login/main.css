@@ -176,4 +176,5 @@ body{
     background-image: linear-gradient(90deg,#ee0979 0,#ff6a00 100%);
     border-radius: 30px;
     cursor: pointer;
+    color:white;
 }

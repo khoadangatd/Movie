@@ -22,7 +22,12 @@ $(function(){
     var i;
     var page=parseInt($(".pagination").attr("page"));
     let content='';
-    var url=window.location.href.replace(page,"");
+    var url='';
+    for(i=0;i<window.location.href.length;i++)
+    {
+        if(window.location.href[i]=="=")
+            url=window.location.href.slice(0,i+1);
+    }
     var total=parseInt($(".pagination").attr("totalP"));
     var bd,kt;
     if(page%5==0){
@@ -81,12 +86,12 @@ $(function(){
         $('.pagination__btn-right').click(function(){
             if(page==total)
                 return;
-            window.location.href=window.location.href.replace(page,page+1);
+            window.location.href=`/movie?p=${page+1}&k=${keyword}`;
         })
         $('.pagination__btn-left').click(function(){
             if(page==1)
                 return;
-            window.location.href=window.location.href.replace(page,page-1);
+            window.location.href=`/movie?p=${page-1}&k=${keyword}`;
         })  
     }
     $('.nav-item__comment').click(function(){
@@ -112,7 +117,7 @@ $(function(){
             var idcmt=$(this).parent().parent().attr('idcmt');
             console.log(idcmt);
             var like=parseInt($(this).attr('like')); 
-            var crr=parseInt($(this).children().eq(1).html());
+            var crr=parseInt($(this).children().eq(1).html()); 
             $(this).children().eq(1).html(crr+1);
             $.post("/ajaxinteract",{idcmt,like},function(data,status){
                 console.log(data);
@@ -237,6 +242,20 @@ $(function(){
         })
     })
     // when click  
+    //Show star feedback
+    
+    var startNumber = parseInt($('.rate').attr('feedback'));
+    function showStartNumber(startNumber){
+        var content='';
+        for(var i=0;i<startNumber;i++){
+            content+='<i class="fas fa-star rate-act yellow"></i>';
+        }
+        for(var i=0;i<5-startNumber;i++){
+            content+='<i class="fas fa-star rate-act"></i>';
+        }
+        $('.rate').html(content);
+    }
+    showStartNumber(startNumber);
 })
 
 

@@ -175,25 +175,6 @@ Phim
                     @endforeach
                 @else
                     @foreach($movies as $movie)
-                        <?php
-                            $ten=""; 
-                            $urlD="https://api.themoviedb.org/3/movie/".$movie['id']."?api_key=12baa83af9302206b6af65913d262a81&language=vi";
-                            $detail=file_get_contents($urlD);
-                            $detail=json_decode($detail);
-                            if(isset($detail->spoken_languages[0]))
-                                $qg=$detail->spoken_languages[0]->english_name;
-                            else
-                                $qg="Chưa xác định";
-                            if($detail->runtime==0)
-                                $detail->runtime="Sắp ra mắt";
-                            else
-                                $detail->runtime="Thời gian : ".$detail->runtime." phút";
-                            foreach($detail->genres as $genres)
-                            {
-                                $genres->name=str_replace("Phim","",$genres->name);
-                                $ten=$ten.$genres->name." ";
-                            }
-                        ?>
                         <div class='col-6 mt-5 d-flex'>
                             <a href='/movie/{{$movie["id"]}}'>
                                 <div class='movie-img'>
@@ -209,15 +190,6 @@ Phim
                                 <h3 class='movie-content-title'>
                                     {{$movie["title"]}}
                                 </h3>
-                                <p class="movie-content-title-engl">
-                                    <?php echo $detail->runtime?>
-                                </p>
-                                <p class='movie-content-category'>
-                                    Thể loại : <?php echo $ten;?>
-                                </p>
-                                <p class="movie-content-country">
-                                    Ngôn ngữ : <?php echo $qg?>
-                                </p>
                                 <p class='movie-content-imbd'>
                                     iMDb {{$movie["vote_average"]}}
                                 </p>
